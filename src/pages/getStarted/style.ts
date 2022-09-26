@@ -4,15 +4,18 @@ import { RFValue } from 'react-native-responsive-fontsize'
 
 
 export const Container = styled.SafeAreaView`
-    flex: 1;
-    /* background-color: ${({ theme }) => theme.colors.primary}; */
+    flex: 1;  
     align-items: center;
     justify-content: center;
     padding: 10px;
     
 `
 export const Content = styled.View`
-    margin-top: 70px;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
    
 
 `
@@ -27,7 +30,7 @@ export const Image = styled.Image`
 `
 
 export const Description = styled.View`
-    margin-top: 100px;
+    margin-top: 90px;
     margin-bottom: 20px;
 
 `
@@ -43,7 +46,7 @@ export const Text = styled.Text`
     color: ${({ theme }) => theme.colors.baseline};
 `
 export const TextButton = styled.Text`
-    font-size: ${RFValue(8)}px;
+    font-size: ${RFValue(9)}px;
     font-family: ${({ theme }) => theme.fonts.Regular};
     color: ${({ theme }) => theme.colors.baseline};
 

@@ -1,5 +1,5 @@
 import { ThemeProvider } from 'styled-components'
-import { Home } from "./src/pages/home";
+import { GetStarted } from "./src/pages/getStarted";
 import { theme } from './src/styles';
 import {
   useFonts,
@@ -7,6 +7,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
+import Home from './src/pages/Home';
 
 export default function App() {
 
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      {/* <GetStarted /> */}
       <Home />
     </ThemeProvider>
 

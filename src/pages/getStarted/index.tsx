@@ -1,8 +1,10 @@
+import { LinearGradient } from "expo-linear-gradient"
 import { StatusBar, TouchableOpacity } from "react-native"
-import { Background } from "../../components/background"
+import { theme } from "../../styles"
+import Logo from '../../../assets/Logo.svg'
+
 import {
     Container,
-    Image,
     AppName,
     Content,
     Description,
@@ -11,17 +13,35 @@ import {
     TextButton
 } from "./style"
 
-export const Home = () => {
+export const GetStarted = () => {
     return (
-        <Background>
+        <LinearGradient
+            colors={[theme.colors.primary, '#201329', '#481C4A']}
+            locations={[0.1, 0.9, 1]}
+            start={{
+                x: 0.9,
+                y: 0.1
+            }}
+            end={{
+                x: 0.1,
+                y: 0.99
+            }}
+
+            style={{
+                flex: 1
+            }}
+        >
             <Container>
+
                 <StatusBar
                     hidden
                 />
                 <Content>
-                    <Image
-                        source={require('../../../assets/Logo.png')}
+                    <Logo
+                        width={100}
+                        height={100}
                     />
+
                     <AppName>
                         BITIFY
                     </AppName>
@@ -39,7 +59,7 @@ export const Home = () => {
                 <TouchableOpacity
                     style={{
                         backgroundColor: '#1D1B32',
-                        padding: 14,
+                        padding: 16,
                         borderRadius: 30
                     }}
                 >
@@ -48,6 +68,6 @@ export const Home = () => {
                     </TextButton>
                 </TouchableOpacity>
             </Container>
-        </Background>
+        </LinearGradient>
     )
 }
