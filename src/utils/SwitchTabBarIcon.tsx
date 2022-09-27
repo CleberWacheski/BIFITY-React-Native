@@ -22,7 +22,7 @@ export const SwitchTabBarIcon = ({ TabBarIcon, route }: SwitchTabBarIconProps) =
         }
         break;
         case ('Currencies') : {
-            name = 'bitcoin'
+            name = 'coins'
         }
         break;
         case ('Settings') : {

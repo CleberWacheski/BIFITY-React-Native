@@ -6,7 +6,6 @@ import EthereumLogo from '../../../assets/EthereumLogo.svg'
 import {
     Container,
     Header,
-    NotificationButton,
     HeaderContent,
     Avatar,
     Text,
@@ -24,31 +23,23 @@ import {
     Section,
     ContentSection,
     TitleSection,
-    InitialsCoin,
     ButtonSection,
     OptionText,
-    MainSection,
-    Coin,
-    LogoContent,
-    DescriptionCoin,
-    ValueCoin,
-    InformationCoin,
-    TitleCoin,
-    MainValue,
-    SumaryValue,
     Assets,
     DescriptionAssets,
     TitleAssets,
 
 
 } from './style';
-import { theme } from '../../styles';
+
 import { CardCoin } from '../../components/CardCoin';
 import { ScrollView } from 'react-native';
-
+import { NotificationsButton } from '../../components/NotificationsButton';
+import { CoinSection } from '../../components/CoinSection';
 
 
 export const Home: React.FC = () => {
+
     return (
         <Container>
             <Header>
@@ -62,13 +53,7 @@ export const Home: React.FC = () => {
                         WELCOME BACK
                     </Text>
                 </HeaderContent>
-                <NotificationButton>
-                    <Ionicons
-                        name="notifications"
-                        size={26}
-                        color={theme.colors.secondary}
-                    />
-                </NotificationButton>
+                <NotificationsButton />
             </Header>
 
             <Balance>
@@ -117,42 +102,7 @@ export const Home: React.FC = () => {
                         </OptionText>
                     </ButtonSection>
                 </ContentSection>
-                <MainSection>
-                    <Coin>
-                        <DescriptionCoin>
-
-                            <LogoContent>
-                                <BitcoinLogo
-                                    width={30}
-                                    height={30}
-                                    color='white'
-                                    style={{
-                                        transform: [{
-                                            translateY: -4
-                                        }]
-                                    }}
-                                />
-                            </LogoContent>
-
-                            <InformationCoin>
-                                <TitleCoin>Bitcoin</TitleCoin>
-                                <InitialsCoin>
-                                    BTC
-                                </InitialsCoin>
-
-                            </InformationCoin>
-
-                        </DescriptionCoin>
-                        <ValueCoin>
-                            <MainValue>
-                                $26927
-                            </MainValue>
-                            <SumaryValue>
-                                2.05 BTC
-                            </SumaryValue>
-                        </ValueCoin>
-                    </Coin>
-                </MainSection>
+                    <CoinSection />
             </Section>
 
             <Assets>
