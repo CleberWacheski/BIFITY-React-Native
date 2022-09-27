@@ -1,10 +1,12 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import BitcoinLogo from '../../../assets/BitcoinLogo.svg'
+import EthereumLogo from '../../../assets/EthereumLogo.svg'
 
 import {
     Container,
     Header,
+    NotificationButton,
     HeaderContent,
     Avatar,
     Text,
@@ -42,9 +44,11 @@ import {
 } from './style';
 import { theme } from '../../styles';
 import { CardCoin } from '../../components/CardCoin';
-import { FlatList, ListViewComponent, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
-const Home: React.FC = () => {
+
+
+export const Home: React.FC = () => {
     return (
         <Container>
             <Header>
@@ -58,11 +62,13 @@ const Home: React.FC = () => {
                         WELCOME BACK
                     </Text>
                 </HeaderContent>
-                <Ionicons
-                    name="notifications"
-                    size={26}
-                    color={theme.colors.secondary}
-                />
+                <NotificationButton>
+                    <Ionicons
+                        name="notifications"
+                        size={26}
+                        color={theme.colors.secondary}
+                    />
+                </NotificationButton>
             </Header>
 
             <Balance>
@@ -164,17 +170,31 @@ const Home: React.FC = () => {
                 <ScrollView
                     horizontal
                 >
-                    <CardCoin />
-                    <CardCoin />
-                    <CardCoin />
-                    <CardCoin />
-                    <CardCoin />
+                    <CardCoin
+                        Coin='Bitcoin'
+                        CoinValue='$6012.00'
+                        Color='#F7B502'
+                        Plus='+2.17'
+                        Variant='UP'
+                        ImgComponent={BitcoinLogo}
+
+                    />
+
+                    <CardCoin
+                        Coin='Ethereum'
+                        CoinValue='$4512.00'
+                        Color='#45BA62'
+                        Plus='-1.17'
+                        Variant='DOWN'
+                        ImgComponent={EthereumLogo}
+
+                    />
+
                 </ScrollView>
+
             </Assets>
 
 
         </Container>
     )
 }
-
-export default Home;

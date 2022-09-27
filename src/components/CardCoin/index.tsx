@@ -8,36 +8,48 @@ import {
 } from './style'
 
 import { Entypo } from '@expo/vector-icons';
-import BitcoinLogo from '../../../assets/BitcoinLogo.svg'
-import { LinearGradient } from 'expo-linear-gradient';
+import { SvgProps } from 'react-native-svg';
+import { FC } from 'react';
 
+interface CardCoinProps {
+    ImgComponent: FC<SvgProps>;
+    Color: string;
+    Coin: string;
+    CoinValue: string;
+    Plus: string;
+    Variant: "UP" | "DOWN"
+}
 
-export const CardCoin = () => {
+export const CardCoin = ({ Coin, ImgComponent, Plus, CoinValue, Variant, Color }: CardCoinProps) => {
 
     return (
-        <Container>
+        <Container
+            activeOpacity={0.6}  
+            
+        >
             <AvatarCoin>
-                <BitcoinLogo
+                <ImgComponent
                     width={30}
                     height={30}
-                    color='#F7B502'
+                    color={Color}
+                    fill={Color}
                     style={{
                         transform: [{
-                            translateY: -3
+                            translateY: -2
                         }],
                     }}
                 />
             </AvatarCoin>
             <Title>
-                Bitcoin
+                {Coin}
             </Title>
             <Value>
-                $6012.00
+                {CoinValue}
             </Value>
             <CardPlusCoin>
-                <Entypo name="arrow-bold-up" size={10} color="#F7B502" />
+                <Entypo name={(Variant === 'UP') ? 'arrow-bold-up' : 'arrow-bold-down'} size={10} color={Color} />
                 <PlusText>
-                    +2.17
+                    {Plus}
                 </PlusText>
             </CardPlusCoin>
         </Container >

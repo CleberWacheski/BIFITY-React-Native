@@ -1,17 +1,22 @@
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native'
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.ScrollView`
   flex:1;
   background-color: ${({ theme }) => theme.colors.primary};
   padding: 22px;
 `;
 
 export const Header = styled.View`
-     display: flex;
+    margin-top: 10px;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+`
+export const NotificationButton = styled.TouchableOpacity`
+    padding: 5px;
 
 `
 export const HeaderContent = styled.View`
@@ -32,7 +37,7 @@ export const Text = styled.Text`
 `
 export const Balance = styled.View`
     margin-top: 20px;
-    padding: 15px 20px;
+    padding: 10px 20px;
     background-color: #211E41;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -49,14 +54,14 @@ export const TotalBalance = styled.View``
 export const Description = styled.Text`
 
     color: #A7A7A7;
-    font-size: ${RFValue(15)}px;
+    font-size: ${RFValue(13)}px;
     font-family: ${({ theme }) => theme.fonts.SemiBold};
     
 `
 export const Value = styled.Text`
 
     color: ${({ theme }) => theme.colors.baseline};
-    font-size: ${RFValue(20)}px;
+    font-size: ${RFValue(18)}px;
     font-family: ${({ theme }) => theme.fonts.Bold};
     
 `
@@ -66,7 +71,7 @@ export const PercentegeCard = styled.View`
 `
 export const Percentege = styled.Text`
     color: ${({ theme }) => theme.colors.baseline};
-    font-size: ${RFValue(12)}px;
+    font-size: ${RFValue(10)}px;
     font-family: ${({ theme }) => theme.fonts.Regular};
     
 `
@@ -90,7 +95,7 @@ export const ProfitContent = styled.View`
     
 export const ProfitDescription = styled.Text`
     color: #A7A7A7;
-    font-size: ${RFValue(15)}px;
+    font-size: ${RFValue(13)}px;
     font-family: ${({ theme }) => theme.fonts.Regular};
 
 
@@ -98,14 +103,14 @@ export const ProfitDescription = styled.Text`
     
 export const ProfitValue = styled.Text`
     color: ${({ theme }) => theme.colors.baseline};
-    font-size: ${RFValue(16)}px;
+    font-size: ${RFValue(14)}px;
     font-family: ${({ theme }) => theme.fonts.SemiBold};
 
 `
     
 export const ProfitPercentege = styled.Text`
     color: ${({ theme }) => theme.colors.baseline};
-    font-size: ${RFValue(12)}px;
+    font-size: ${RFValue(10)}px;
     font-family: ${({ theme }) => theme.fonts.Regular};
     margin-bottom: 5px;
 
@@ -125,7 +130,7 @@ export const ContentSection = styled.View`
 export const TitleSection = styled.Text`
     color: ${({theme})=> theme.colors.baseline};
     font-family: ${({theme})=> theme.fonts.Bold};
-    font-size: ${RFValue(15)}px;
+    font-size: ${RFValue(12)}px;
 
 `
 export const ButtonSection = styled.TouchableOpacity``
@@ -133,7 +138,7 @@ export const ButtonSection = styled.TouchableOpacity``
 export const OptionText = styled.Text`
     color: #C5C5C5;
     font-family: ${({theme})=> theme.fonts.Regular};
-    font-size: ${RFValue(12)}px;
+    font-size: ${RFValue(10)}px;
     text-decoration: underline;
 `
 export const MainSection = styled.View`
@@ -168,29 +173,29 @@ export const InformationCoin = styled.View``
 export const TitleCoin = styled.Text`
     color: ${({theme})=> theme.colors.baseline};
     font-family: ${({theme})=> theme.fonts.Bold};
-    font-size: ${RFValue(16)}px;
+    font-size: ${RFValue(14)}px;
 
 `
 export const InitialsCoin = styled.Text`
     color: #6C757D;
     font-family: ${({theme})=> theme.fonts.Regular};
-    font-size: ${RFValue(14)}px;
+    font-size: ${RFValue(12)}px;
     margin-top: -13px;
 
 `
 export const MainValue = styled.Text`
     color: ${({theme})=> theme.colors.baseline};
     font-family: ${({theme})=> theme.fonts.Bold};
-    font-size: ${RFValue(15)}px;
+    font-size: ${RFValue(13)}px;
 
 `
 export const SumaryValue = styled.Text`
     color: #6C757D;
     font-family: ${({theme})=> theme.fonts.Bold};
-    font-size: ${RFValue(9)}px;
+    font-size: ${RFValue(8)}px;
 `
 export const Assets = styled.View`
-
+    margin-top: -5px;
 
 
 `
@@ -206,6 +211,6 @@ export const DescriptionAssets = styled.View`
 export const TitleAssets = styled.Text`
     color: ${({theme})=> theme.colors.baseline};
     font-family: ${({theme})=> theme.fonts.Bold};
-    font-size: ${RFValue(15)}px;
+    font-size: ${RFValue(13)}px;
 
 `

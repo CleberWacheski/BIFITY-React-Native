@@ -13,7 +13,16 @@ import {
     TextButton
 } from "./style"
 
-export const GetStarted = () => {
+interface GetStartedProps {
+    SignIn: () => void
+}
+
+
+export const GetStarted = ({ SignIn }: GetStartedProps) => {
+
+
+
+
     return (
         <LinearGradient
             colors={[theme.colors.primary, '#201329', '#481C4A']}
@@ -62,6 +71,7 @@ export const GetStarted = () => {
                         padding: 16,
                         borderRadius: 30
                     }}
+                    onPress={SignIn}
                 >
                     <TextButton>
                         Swipe to get started
