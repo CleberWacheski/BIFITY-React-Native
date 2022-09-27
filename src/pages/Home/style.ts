@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 export const Container = styled.ScrollView`
   flex:1;
   background-color: ${({ theme }) => theme.colors.primary};
-  padding: 22px;
+  padding: 20px 25px;
 `;
 
 export const Header = styled.View`
@@ -57,7 +57,7 @@ export const Description = styled.Text`
 export const Value = styled.Text`
 
     color: ${({ theme }) => theme.colors.baseline};
-    font-size: ${RFValue(18)}px;
+    font-size: ${RFValue(16)}px;
     font-family: ${({ theme }) => theme.fonts.Bold};
     
 `
@@ -99,7 +99,7 @@ export const ProfitDescription = styled.Text`
     
 export const ProfitValue = styled.Text`
     color: ${({ theme }) => theme.colors.baseline};
-    font-size: ${RFValue(14)}px;
+    font-size: ${RFValue(13)}px;
     font-family: ${({ theme }) => theme.fonts.SemiBold};
 
 `

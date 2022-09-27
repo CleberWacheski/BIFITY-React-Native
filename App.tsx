@@ -5,7 +5,7 @@ import {
   useFonts,
   Poppins_400Regular,
   Poppins_600SemiBold,
-  Poppins_700Bold
+  Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 
 import { NavigationContainer } from '@react-navigation/native';
