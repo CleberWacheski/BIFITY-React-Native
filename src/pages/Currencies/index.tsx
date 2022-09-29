@@ -1,10 +1,13 @@
-import { Dimensions, ScrollView } from "react-native"
-import { LineChart,BarChart } from "react-native-chart-kit"
+import { FlashList } from "@shopify/flash-list"
+import { useState } from "react"
+import { Dimensions } from "react-native"
+import { LineChart } from "react-native-chart-kit"
 import { BackPage } from "../../components/BackPage"
 import { CoinSection } from "../../components/CoinSection"
 import { InicialsCoinSelect } from "../../components/InicialsCoinSelect"
 import { NotificationsButton } from "../../components/NotificationsButton"
-import {theme} from '../../styles/index'
+import { ScreenProps } from "../../routes"
+import { theme } from '../../styles/index'
 
 import {
     Container,
@@ -13,8 +16,20 @@ import {
     ChartContent,
 } from "./style"
 
-export const Currencies = () => {
 
+export const Currencies = ({ navigation, route }: ScreenProps) => {
+
+    const exchanges = route.params?.exchanges.map((exchange) => {
+        return {
+            exchange_id: exchange.exchange_id
+        }
+    })
+
+    const [assetActive, setassetActive] = useState('')
+
+    const handleSetAssetActive = (assetName: string) => { setassetActive(assetActive) }
+
+    console.log(assetActive)
 
     return (
         <Container>
@@ -27,42 +42,29 @@ export const Currencies = () => {
                 TRADING
             </Title>
 
-            <ScrollView
-                horizontal
-                style={{
-                    maxHeight: 75
+            <FlashList
+                data={exchanges}
+                keyExtractor={coin => coin.exchange_id}
+                estimatedItemSize={337}
+                renderItem={({ item }) => {
+                    return (
+                        <InicialsCoinSelect
+                            active={(assetActive === item.exchange_id)}
+                            name={item.exchange_id}
+                            handleSetAssetActive={handleSetAssetActive}
+                        />
+                    )
                 }}
-            >
-                <InicialsCoinSelect
-                    name="BTC"
-                    active={true}
-                />
-                <InicialsCoinSelect
-                    name="ETF"
-                    active={false}
-                />
-                <InicialsCoinSelect
-                    name="LTC"
-                    active={false}
-                />
-                <InicialsCoinSelect
-                    name="XRP"
-                    active={false}
-                />
-                <InicialsCoinSelect
-                    name="EOC"
-                    active={false}
-                />
-
-            </ScrollView>
+                horizontal
+            />
 
             <CoinSection />
 
             <ChartContent>
                 <LineChart
                     data={{
-                        
-                        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"],
+
+                        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
                         datasets: [
                             {
                                 data: [
@@ -82,20 +84,20 @@ export const Currencies = () => {
                         ]
                     }}
                     bezier={false}
-                    width={Dimensions.get("window").width-10} 
+                    width={Dimensions.get("window").width - 10}
                     height={250}
                     yAxisLabel="$"
                     yAxisSuffix="k"
                     withDots={false}
                     withVerticalLines={false}
                     withHorizontalLines={false}
-                    
+
                     transparent
                     chartConfig={{
                         decimalPlaces: 0,
                         strokeWidth: 2,
-                        fillShadowGradientToOpacity : 0.4,
-                        fillShadowGradient : theme.colors.secondary,
+                        fillShadowGradientToOpacity: 0.4,
+                        fillShadowGradient: theme.colors.secondary,
 
                         color: (opacity = 1) => theme.colors.secondary,
                         labelColor: (opacity = 0.1) => `rgba(255, 255, 255, ${opacity})`,

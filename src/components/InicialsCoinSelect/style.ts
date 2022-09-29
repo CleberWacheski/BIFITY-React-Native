@@ -7,8 +7,8 @@ interface Props {
 
 export const Container = styled.TouchableOpacity`
 
-    margin-top: 30px;
-    margin-right:43px ;
+    padding-top: 30px;
+    padding-right:43px ;
 
 `;
 

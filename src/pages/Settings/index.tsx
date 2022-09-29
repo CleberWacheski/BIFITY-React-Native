@@ -7,13 +7,11 @@ import {
     UserName,
     SignOut,
     SignOutText,
-
 } from "./style"
 
 
 export const Settings = () => {
 
-    
 
     return (
         <Container>
