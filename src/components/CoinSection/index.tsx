@@ -1,58 +1,58 @@
+import { icons } from '../../AssetsIcons/icons';
 import {
     InitialsCoin,
     Coin,
     LogoContent,
+    AssetLogo,
     DescriptionCoin,
-    ValueCoin,
     InformationCoin,
     TitleCoin,
     MainValue,
-    SumaryValue,
     Container,
 
 
 } from './style';
 
-import BitcoinLogo from '../../../assets/BitcoinLogo.svg'
 
 
+interface CoinSectionProps {
+    name: string;
+    assetID: string;
+    value: number;
+}
 
-export const CoinSection = () => {
+
+export const CoinSection = ({ assetID, name, value }: CoinSectionProps) => {
+
+    const uri = icons.find((icon) => icon.asset_id === assetID)!.url
+
+
     return (
         <Container>
             <Coin>
                 <DescriptionCoin>
 
                     <LogoContent>
-                        <BitcoinLogo
-                            width={30}
-                            height={30}
-                            color='white'
-                            style={{
-                                transform: [{
-                                    translateY: -4
-                                }]
+                        <AssetLogo
+                            source={{
+                                uri
                             }}
+
                         />
                     </LogoContent>
 
                     <InformationCoin>
-                        <TitleCoin>Bitcoin</TitleCoin>
+                        <TitleCoin>{name}</TitleCoin>
                         <InitialsCoin>
-                            BTC
+                            {assetID}
                         </InitialsCoin>
 
                     </InformationCoin>
 
                 </DescriptionCoin>
-                <ValueCoin>
-                    <MainValue>
-                        $26927
-                    </MainValue>
-                    <SumaryValue>
-                        2.05 BTC
-                    </SumaryValue>
-                </ValueCoin>
+                <MainValue>
+                    ${value}
+                </MainValue>
             </Coin>
         </Container>
     )

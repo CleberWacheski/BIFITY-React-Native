@@ -6,6 +6,7 @@ import { BackPage } from "../../components/BackPage"
 import { CoinSection } from "../../components/CoinSection"
 import { InicialsCoinSelect } from "../../components/InicialsCoinSelect"
 import { NotificationsButton } from "../../components/NotificationsButton"
+import { useRates } from "../../hooks/useCoinAPI"
 import { ScreenProps } from "../../routes"
 import { theme } from '../../styles/index'
 
@@ -17,23 +18,20 @@ import {
 } from "./style"
 
 
+
 export const Currencies = ({ navigation, route }: ScreenProps) => {
 
-    const exchanges = route.params?.exchanges.map((exchange) => {
-        return {
-            exchange_id: exchange.exchange_id
-        }
-    })
+    const assets = route.params!.assets
+    const [assetActive, setAssetActive] = useState('BTC')
+    const assetSelected = assets?.find((asset) => asset.assetId === assetActive)
 
-    const [assetActive, setassetActive] = useState('')
+    const { data, isLoading,refetch } = useRates(assetActive)
 
-    const handleSetAssetActive = (assetName: string) => { setassetActive(assetActive) }
-
-    console.log(assetActive)
+    refetch()
 
     return (
         <Container>
-            <Header>
+            <Header>  
                 <BackPage />
                 <NotificationsButton />
             </Header>
@@ -43,22 +41,27 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
             </Title>
 
             <FlashList
-                data={exchanges}
-                keyExtractor={coin => coin.exchange_id}
-                estimatedItemSize={337}
+                data={assets}
+                keyExtractor={coin => coin.assetId}
+                estimatedItemSize={5}
+                extraData={assetActive}
                 renderItem={({ item }) => {
                     return (
                         <InicialsCoinSelect
-                            active={(assetActive === item.exchange_id)}
-                            name={item.exchange_id}
-                            handleSetAssetActive={handleSetAssetActive}
+                            active={(assetActive === item.assetId)}
+                            name={item.name}
+                            onPress={() => setAssetActive(item.assetId)}
                         />
                     )
                 }}
                 horizontal
             />
 
-            <CoinSection />
+            <CoinSection
+                assetID={assetSelected!.assetId}
+                name={assetSelected!.name}
+                value={assetSelected!.price}
+            />
 
             <ChartContent>
                 <LineChart
@@ -67,31 +70,19 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
                         labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
                         datasets: [
                             {
-                                data: [
-                                    0,
-                                    1,
-                                    9,
-                                    2,
-                                    20,
-                                    5,
-                                    1,
-                                    9,
-                                    2,
-                                    20,
-                                    5,
-                                ]
+                                data: (!!data) ? [...data] : []
                             }
                         ]
                     }}
                     bezier={false}
-                    width={Dimensions.get("window").width - 10}
+                    width={Dimensions.get("window").width - 20}
                     height={250}
                     yAxisLabel="$"
                     yAxisSuffix="k"
                     withDots={false}
                     withVerticalLines={false}
                     withHorizontalLines={false}
-
+                    
                     transparent
                     chartConfig={{
                         decimalPlaces: 0,

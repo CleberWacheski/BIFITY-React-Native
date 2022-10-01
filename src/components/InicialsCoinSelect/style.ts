@@ -2,7 +2,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native'
 
 interface Props {
-    active : boolean
+    active: boolean
 }
 
 export const Container = styled.TouchableOpacity`
@@ -20,7 +20,7 @@ export const CoinName = styled.Text<Props>`
 
     border-bottom-width: 3px ;
     border-bottom-style: solid;
-    border-bottom-color: ${({ theme,active}) => 
-        (active) ? theme.colors.secondary : ''};
+    border-bottom-color: ${({ theme, active }) =>
+        (active) ? theme.colors.secondary : theme.colors.primary};
 
 `

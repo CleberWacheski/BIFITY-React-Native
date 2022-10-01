@@ -12,8 +12,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Routes } from './src/routes';
 import { useState } from 'react';
 import { GetStarted } from './src/pages/getStarted';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 export default function App() {
+
+  const [login, setLogin] = useState(false)
+  const queryClient = new QueryClient()
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -21,23 +25,25 @@ export default function App() {
     Poppins_700Bold,
   })
 
-  const [login, setLogin] = useState(false)
+
 
   if (!fontsLoaded) {
     return null
   }
 
-  function handleSignIn () {
+  function handleSignIn() {
     setLogin(true)
   }
 
   return (
     <NavigationContainer>
-      <ThemeProvider theme={theme}>
-        {
-          (!login) ? <GetStarted SignIn={handleSignIn} /> : <Routes />
-        }
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          {
+            (!login) ? <GetStarted SignIn={handleSignIn} /> : <Routes />
+          }
+        </ThemeProvider>
+      </QueryClientProvider>
     </NavigationContainer>
   )
 }

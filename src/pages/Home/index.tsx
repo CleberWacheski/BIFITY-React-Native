@@ -102,7 +102,11 @@ export const Home: React.FC = () => {
                         </OptionText>
                     </ButtonSection>
                 </ContentSection>
-                    <CoinSection />
+                <CoinSection
+                    assetID="BTC"
+                    name="Bitcoin"
+                    value={26927}
+                />
             </Section>
 
             <Assets>
