@@ -16,6 +16,12 @@ export const Header = styled.View`
 
 `
 
+export const LoadingContent = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+`
+
 export const Title = styled.Text`
     margin-top: 15px;
     color: ${({ theme }) => theme.colors.baseline};
