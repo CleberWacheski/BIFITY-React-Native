@@ -34,7 +34,7 @@ export const Notifications = () => {
                 <NotificationCard
                     newNotification={false}
                     DateNotitification='Fer 13, 2022'
-                    textNotitification="Upload yout profile picture and leave your wallet with your face"
+                    textNotitification="Upload your profile picture and leave your wallet with your face"
                 />
                 <NotificationCard
                     newNotification={false}

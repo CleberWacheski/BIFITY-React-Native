@@ -1,7 +1,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import BitcoinLogo from '../../../assets/BitcoinLogo.svg'
-import EthereumLogo from '../../../assets/EthereumLogo.svg'
+
 
 import {
     Container,
@@ -33,12 +32,16 @@ import {
 } from './style';
 
 import { CardCoin } from '../../components/CardCoin';
-import { ScrollView } from 'react-native';
 import { NotificationsButton } from '../../components/NotificationsButton';
 import { CoinSection } from '../../components/CoinSection';
+import { ScreenProps } from '../../routes';
+import { FlashList } from '@shopify/flash-list';
 
 
-export const Home: React.FC = () => {
+export const Home = ({ navigation, route }: ScreenProps) => {
+
+    const assets = route.params!.assets
+    
 
     return (
         <Container>
@@ -50,7 +53,7 @@ export const Home: React.FC = () => {
                         }}
                     />
                     <Text>
-                        WELCOME BACK
+                        WELLCOME BACK
                     </Text>
                 </HeaderContent>
                 <NotificationsButton />
@@ -114,37 +117,24 @@ export const Home: React.FC = () => {
                     <TitleAssets>
                         ASSETS
                     </TitleAssets>
-                    <ButtonSection>
-                        <OptionText>
-                            view all
-                        </OptionText>
-                    </ButtonSection>
                 </DescriptionAssets>
 
-                <ScrollView
+                <FlashList
+                    data={assets}
+                    keyExtractor={coin => coin.assetId}
+                    estimatedItemSize={5}
+                    renderItem={({ item }) => {
+                        return (
+                            <CardCoin
+                                Coin={item.name}
+                                Id={item.assetId}
+                                CoinValue={`$${item.price}`}
+                            />
+                        )
+                    }}
                     horizontal
-                >
-                    <CardCoin
-                        Coin='Bitcoin'
-                        CoinValue='$6012.00'
-                        Color='#F7B502'
-                        Plus='+2.17'
-                        Variant='UP'
-                        ImgComponent={BitcoinLogo}
+                />
 
-                    />
-
-                    <CardCoin
-                        Coin='Ethereum'
-                        CoinValue='$4512.00'
-                        Color='#45BA62'
-                        Plus='-1.17'
-                        Variant='DOWN'
-                        ImgComponent={EthereumLogo}
-
-                    />
-
-                </ScrollView>
 
             </Assets>
 

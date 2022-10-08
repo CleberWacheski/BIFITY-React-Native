@@ -38,8 +38,15 @@ interface ExchangeRate {
     rate_close: number;
 }
 
+interface AssetsStatus {
+
+    percentege: string;
+    assetID: string;
+}
+
 
 const today = new Date().toISOString()
+const yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString()
 const SevenDaysBefore = new Date(new Date().setDate(new Date().getDate() - 6)).toISOString()
 
 
@@ -84,12 +91,35 @@ async function getExchangeRates(assetID: string) {
 }
 
 
+async function getAssetStatus(assetID: string) {
+
+    const assetsStatus : AssetsStatus[] = []
+
+    const { data } = await api.get<ExchangeRate[]>(`exchangerate/${assetID}/USD/history?period_id=1DAY&time_start=${yesterday}&time_end=${today}`)
+
+    const yesterdayValue = data[0].rate_open
+    const todayValue = data[1].rate_close
+
+    const percentege = (yesterdayValue / todayValue).toFixed(2)
+
+    assetsStatus.push({
+        assetID,
+        percentege,
+    }) 
+
+    return assetsStatus
+
+}
+
 
 
 export const useAssets = () => {
     return useQuery(['assets'], getAssets)
 }
 
+export const useAssetStatus = (assetID: string) => {
+    return useQuery(['status'], () => getAssetStatus(assetID))
+}
 
 export const useRates = (assetID: string) => {
     return useQuery(['rates'], () => getExchangeRates(assetID))

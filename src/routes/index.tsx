@@ -10,7 +10,7 @@ import { SwitchTabBarIcon } from "../utils/SwitchTabBarIcon";
 
 
 export type RootTabsParamList = {
-    Home: undefined;
+    Home: { assets: assetsProps[] } | undefined;
     Currencies: { assets: assetsProps[] } | undefined;
     Settings: undefined;
     Notifications: undefined;
@@ -47,7 +47,7 @@ export const Routes = () => {
 
         >
 
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Home" component={Home} initialParams={{ assets: data }} />
             <Tab.Screen name="Currencies" component={Currencies} initialParams={{ assets: data }} />
             <Tab.Screen name="Settings" component={Settings} />
             <Tab.Screen name="Notifications" component={Notifications} />

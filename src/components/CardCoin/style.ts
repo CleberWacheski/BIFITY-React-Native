@@ -19,16 +19,22 @@ export const AvatarCoin = styled.View`
 
 
 `
+export const AssetLogo = styled.Image`
+    width: 35px;
+    height: 35px;
+
+`
+
 export const Title = styled.Text`
      color: #A7A7A7;
-    font-family: ${({theme})=> theme.fonts.SemiBold};
+    font-family: ${({ theme }) => theme.fonts.SemiBold};
     font-size: ${RFValue(10)}px;
 
 `
 export const Value = styled.Text`
     margin-top: -6px;
-     color: ${({theme})=> theme.colors.baseline};
-    font-family: ${({theme})=> theme.fonts.Bold};
+     color: ${({ theme }) => theme.colors.baseline};
+    font-family: ${({ theme }) => theme.fonts.Bold};
     font-size: ${RFValue(10)}px;
 
 `
@@ -46,7 +52,7 @@ export const CardPlusCoin = styled.View`
 
 export const PlusText = styled.Text`
     color: #A7A7A7;
-    font-family: ${({theme})=> theme.fonts.SemiBold};
+    font-family: ${({ theme }) => theme.fonts.SemiBold};
     font-size: ${RFValue(8)}px;
     margin-left: 5px;
 

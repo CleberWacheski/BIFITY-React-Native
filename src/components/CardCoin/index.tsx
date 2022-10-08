@@ -5,55 +5,68 @@ import {
     Value,
     CardPlusCoin,
     PlusText,
+    AssetLogo,
 } from './style'
 
 import { Entypo } from '@expo/vector-icons';
-import { SvgProps } from 'react-native-svg';
-import { FC } from 'react';
+import { icons } from '../../AssetsIcons/icons';
+import { useAssetStatus } from '../../hooks/useCoinAPI';
+import { theme } from '../../styles';
+
 
 interface CardCoinProps {
-    ImgComponent: FC<SvgProps>;
-    Color: string;
+    Id: string;
     Coin: string;
     CoinValue: string;
-    Plus: string;
-    Variant: "UP" | "DOWN"
 }
 
-export const CardCoin = ({ Coin, ImgComponent, Plus, CoinValue, Variant, Color }: CardCoinProps) => {
+export const CardCoin = ({ Coin, Id, CoinValue }: CardCoinProps) => {
 
-    return (
-        <Container
-            activeOpacity={0.6}  
-            
-        >
-            <AvatarCoin>
-                <ImgComponent
-                    width={30}
-                    height={30}
-                    color={Color}
-                    fill={Color}
-                    style={{
-                        transform: [{
-                            translateY: -2
-                        }],
-                    }}
-                />
-            </AvatarCoin>
-            <Title>
-                {Coin}
-            </Title>
-            <Value>
-                {CoinValue}
-            </Value>
-            <CardPlusCoin>
-                <Entypo name={(Variant === 'UP') ? 'arrow-bold-up' : 'arrow-bold-down'} size={10} color={Color} />
-                <PlusText>
-                    {Plus}
-                </PlusText>
-            </CardPlusCoin>
-        </Container >
-    )
+    const uri = icons.find((icon) => icon.asset_id === Id)?.url
+
+    const { data: assetStatus, isLoading, isFetching } = useAssetStatus(Id)
+
+    console.log(assetStatus)
+
+    if (!isLoading) {
+
+        const percentenge = assetStatus!.find((asset) => asset.assetID === Id)
+
+        return (
+            <Container
+                activeOpacity={0.6}
+
+            >
+                <AvatarCoin>
+                    <AssetLogo
+                        source={{
+                            uri
+                        }}
+                    />
+
+                </AvatarCoin>
+                <Title>
+                    {Coin}
+                </Title>
+                <Value>
+                    {CoinValue}
+                </Value>
+                <CardPlusCoin>
+                    <Entypo name={(Number(percentenge) > 0) ? 'arrow-bold-up' : 'arrow-bold-down'} size={10}
+                        color={(Number(percentenge) > 0) ? '#F7B502' : theme.colors.secondary} />
+                    <PlusText>
+                        {`${percentenge}`}
+                    </PlusText>
+                </CardPlusCoin>
+            </Container >
+        )
+    }
+    else {
+        return null
+    }
+
+
+
 
 
 }
