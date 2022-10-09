@@ -13,15 +13,15 @@ export const Container = styled.TouchableOpacity`
 
 export const AvatarCoin = styled.View`
     background-color: #12111E;
-    padding: 12px;
+    padding: 15px;
     border-radius: 100px;
     margin-bottom: 8px;
 
 
 `
 export const AssetLogo = styled.Image`
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 
 `
 

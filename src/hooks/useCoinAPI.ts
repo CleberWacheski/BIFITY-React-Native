@@ -24,6 +24,8 @@ interface CoinApi {
 export interface assetsProps {
     name: string;
     assetId: string;
+    percentege: string;
+    SevenLastRates: number[];
     price: number;
 }
 
@@ -38,93 +40,58 @@ interface ExchangeRate {
     rate_close: number;
 }
 
-interface AssetsStatus {
 
-    percentege: string;
-    assetID: string;
-}
-
+const ASSETS = ['BTC,ETH,XLM,XRP,ADA']
 
 const today = new Date().toISOString()
-const yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString()
 const SevenDaysBefore = new Date(new Date().setDate(new Date().getDate() - 6)).toISOString()
 
 
-async function getAssets() {
+async function getAssets(ID: string) {
 
-    const { data: assetsAPI } = await api.get<CoinApi[]>('assets', {
-        params: {
-            filter_asset_id: 'BTC,ETH,XLM,XRP,ADA'
-        }
-    })
+    const { data: assetsData } = await api.get<CoinApi[]>(`assets/${ID}`)
 
-    const assets = assetsAPI.reduce((acc, asset) => {
-        acc.push({
-            name: asset.name,
-            assetId: asset.asset_id,
-            price: (asset.price_usd) ? Number(asset.price_usd.toFixed(2)) : 0
-        })
+    const { data: PriceStatus } = await api.get<ExchangeRate[]>(`exchangerate/${ID}/USD/history?period_id=1DAY&time_start=${SevenDaysBefore}&time_end=${today}`)
+
+    const yesterdayValue = PriceStatus[PriceStatus.length - 2].rate_open
+    const todayValue = PriceStatus[PriceStatus.length - 1].rate_close
+
+    const percentege = (yesterdayValue / todayValue).toFixed(4)
+
+    const SevenLastRates = PriceStatus.reduce((acc, asset) => {
+
+        acc.push(asset.rate_close)
 
         return acc
+    }, [] as number[])
 
-    }, [] as assetsProps[])
+
+    const assets = assetsData.reduce((acc, asset) => {
+        return {
+            name: asset.name,
+            assetId: asset.asset_id,
+            percentege,
+            SevenLastRates,
+            price: (asset.price_usd) ? Number(asset.price_usd.toFixed(2)) : 0
+        }
+
+    }, {} as assetsProps)
 
     return assets
 }
 
 
-
-async function getExchangeRates(assetID: string) {
-
-    const { data } = await api.get<ExchangeRate[]>(`exchangerate/${assetID}/USD/history?period_id=1DAY&time_start=${SevenDaysBefore}&time_end=${today}`)
-
-    const rates = data.reduce((acc, rate) => {
-
-        acc.push(rate.rate_open)
-        acc.push(rate.rate_close)
-
-        return acc
-
-    }, [] as number[])
-
-    return rates
-}
-
-
-async function getAssetStatus(assetID: string) {
-
-    const assetsStatus : AssetsStatus[] = []
-
-    const { data } = await api.get<ExchangeRate[]>(`exchangerate/${assetID}/USD/history?period_id=1DAY&time_start=${yesterday}&time_end=${today}`)
-
-    const yesterdayValue = data[0].rate_open
-    const todayValue = data[1].rate_close
-
-    const percentege = (yesterdayValue / todayValue).toFixed(2)
-
-    assetsStatus.push({
-        assetID,
-        percentege,
-    }) 
-
-    return assetsStatus
-
-}
-
-
-
 export const useAssets = () => {
-    return useQuery(['assets'], getAssets)
-}
 
-export const useAssetStatus = (assetID: string) => {
-    return useQuery(['status'], () => getAssetStatus(assetID))
-}
+    const data = ASSETS.map((asset) => {
 
-export const useRates = (assetID: string) => {
-    return useQuery(['rates'], () => getExchangeRates(assetID))
-}
+        const { data, isLoading } = useQuery(['assets', asset], () => getAssets(asset))
+        return { data, isLoading }
+    })
 
+
+    return data
+}
 
 
 

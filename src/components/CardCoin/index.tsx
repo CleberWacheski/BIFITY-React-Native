@@ -10,7 +10,6 @@ import {
 
 import { Entypo } from '@expo/vector-icons';
 import { icons } from '../../AssetsIcons/icons';
-import { useAssetStatus } from '../../hooks/useCoinAPI';
 import { theme } from '../../styles';
 
 
@@ -18,55 +17,41 @@ interface CardCoinProps {
     Id: string;
     Coin: string;
     CoinValue: string;
+    percentege : string;
 }
 
-export const CardCoin = ({ Coin, Id, CoinValue }: CardCoinProps) => {
+export const CardCoin = ({ Coin, Id, CoinValue,percentege }: CardCoinProps) => {
 
     const uri = icons.find((icon) => icon.asset_id === Id)?.url
 
-    const { data: assetStatus, isLoading, isFetching } = useAssetStatus(Id)
 
-    console.log(assetStatus)
+    return (
+        <Container
+            activeOpacity={0.6}
 
-    if (!isLoading) {
+        >
+            <AvatarCoin>
+                <AssetLogo
+                    source={{
+                        uri
+                    }}
+                />
 
-        const percentenge = assetStatus!.find((asset) => asset.assetID === Id)
-
-        return (
-            <Container
-                activeOpacity={0.6}
-
-            >
-                <AvatarCoin>
-                    <AssetLogo
-                        source={{
-                            uri
-                        }}
-                    />
-
-                </AvatarCoin>
-                <Title>
-                    {Coin}
-                </Title>
-                <Value>
-                    {CoinValue}
-                </Value>
-                <CardPlusCoin>
-                    <Entypo name={(Number(percentenge) > 0) ? 'arrow-bold-up' : 'arrow-bold-down'} size={10}
-                        color={(Number(percentenge) > 0) ? '#F7B502' : theme.colors.secondary} />
-                    <PlusText>
-                        {`${percentenge}`}
-                    </PlusText>
-                </CardPlusCoin>
-            </Container >
-        )
-    }
-    else {
-        return null
-    }
-
-
-
-
+            </AvatarCoin>
+            <Title>
+                {Coin}
+            </Title>
+            <Value>
+                {CoinValue}
+            </Value>
+            <CardPlusCoin>
+                <Entypo name={(Number(percentege) > 0) ? 'arrow-bold-up' : 'arrow-bold-down'} size={10}
+                    color={(Number(percentege) > 0) ? '#F7B502' : theme.colors.secondary} />
+                <PlusText>
+                    {percentege}
+                </PlusText>
+            </CardPlusCoin>
+        </Container >
+    )
 
 }

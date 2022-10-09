@@ -111,37 +111,15 @@ export const ProfitPercentege = styled.Text`
     margin-bottom: 5px;
 
 `
-export const Section = styled.View`
-
-    margin-top: 30px;
-
-`
-export const ContentSection = styled.View`
-
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-`
-export const TitleSection = styled.Text`
-    color: ${({theme})=> theme.colors.baseline};
-    font-family: ${({theme})=> theme.fonts.Bold};
-    font-size: ${RFValue(12)}px;
-
-`
-export const ButtonSection = styled.TouchableOpacity``
-
-export const OptionText = styled.Text`
-    color: #C5C5C5;
-    font-family: ${({theme})=> theme.fonts.Regular};
-    font-size: ${RFValue(10)}px;
-    text-decoration: underline;
-`
 
 export const Assets = styled.View`
-    margin-top: -5px;
+    margin-top: 25px;
+    flex: 1;
 
-
+`
+export const List = styled.View`
+    height: 100%;
+    
 `
 export const DescriptionAssets = styled.View`
 

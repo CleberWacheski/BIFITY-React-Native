@@ -22,9 +22,17 @@ export type ScreenProps = BottomTabScreenProps<RootTabsParamList>
 export const Routes = () => {
 
     const Tab = createBottomTabNavigator<RootTabsParamList>()
-    const { data, isLoading } = useAssets()
+    const data = useAssets()
 
-    if (isLoading) {
+
+    if (data.every((data) => data.isLoading)) {
+        return null
+    }
+    else {
+
+        console.log(data.map((data) => data.data))
+
+
         return null
     }
 
@@ -47,8 +55,8 @@ export const Routes = () => {
 
         >
 
-            <Tab.Screen name="Home" component={Home} initialParams={{ assets: data }} />
-            <Tab.Screen name="Currencies" component={Currencies} initialParams={{ assets: data }} />
+            <Tab.Screen name="Home" component={Home} initialParams={{ assets: data.map((data) => data.data) }} />
+            <Tab.Screen name="Currencies" component={Currencies} initialParams={{ assets: data.map((data) => data.data) }} />
             <Tab.Screen name="Settings" component={Settings} />
             <Tab.Screen name="Notifications" component={Notifications} />
 

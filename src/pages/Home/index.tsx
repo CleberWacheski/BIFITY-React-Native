@@ -19,12 +19,8 @@ import {
     ProfitDescription,
     ProfitValue,
     ProfitPercentege,
-    Section,
-    ContentSection,
-    TitleSection,
-    ButtonSection,
-    OptionText,
     Assets,
+    List,
     DescriptionAssets,
     TitleAssets,
 
@@ -33,15 +29,16 @@ import {
 
 import { CardCoin } from '../../components/CardCoin';
 import { NotificationsButton } from '../../components/NotificationsButton';
-import { CoinSection } from '../../components/CoinSection';
 import { ScreenProps } from '../../routes';
 import { FlashList } from '@shopify/flash-list';
+
 
 
 export const Home = ({ navigation, route }: ScreenProps) => {
 
     const assets = route.params!.assets
-    
+
+
 
     return (
         <Container>
@@ -94,24 +91,6 @@ export const Home = ({ navigation, route }: ScreenProps) => {
                 </ProfitPercentege>
             </ProfitCard>
 
-            <Section>
-                <ContentSection>
-                    <TitleSection>
-                        HOLDINGS
-                    </TitleSection>
-                    <ButtonSection>
-                        <OptionText>
-                            See All
-                        </OptionText>
-                    </ButtonSection>
-                </ContentSection>
-                <CoinSection
-                    assetID="BTC"
-                    name="Bitcoin"
-                    value={26927}
-                />
-            </Section>
-
             <Assets>
                 <DescriptionAssets>
                     <TitleAssets>
@@ -119,23 +98,25 @@ export const Home = ({ navigation, route }: ScreenProps) => {
                     </TitleAssets>
                 </DescriptionAssets>
 
-                <FlashList
-                    data={assets}
-                    keyExtractor={coin => coin.assetId}
-                    estimatedItemSize={5}
-                    renderItem={({ item }) => {
-                        return (
-                            <CardCoin
-                                Coin={item.name}
-                                Id={item.assetId}
-                                CoinValue={`$${item.price}`}
-                            />
-                        )
-                    }}
-                    horizontal
-                />
-
-
+                <List >
+                    <FlashList
+                        data={assets}
+                        keyExtractor={coin => coin.assetId}
+                        estimatedItemSize={5}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({ item }) => {
+                            return (
+                                <CardCoin
+                                    Coin={item.name}
+                                    Id={item.assetId}
+                                    CoinValue={`$${item.price}`}
+                                    percentege={item.percentege}
+                                />
+                            )
+                        }}
+                        horizontal
+                    />
+                </List>
             </Assets>
 
 
