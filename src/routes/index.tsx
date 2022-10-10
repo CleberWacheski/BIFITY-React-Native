@@ -22,15 +22,15 @@ export type ScreenProps = BottomTabScreenProps<RootTabsParamList>
 export const Routes = () => {
 
     const Tab = createBottomTabNavigator<RootTabsParamList>()
-    const data = useAssets()
+    const { data, isLoading } = useAssets()
 
 
-    if (data.every((data) => data.isLoading)) {
+    if (isLoading) {
         return null
     }
     else {
 
-        console.log(data.map((data) => data.data))
+        console.log(data)
 
 
         return null
