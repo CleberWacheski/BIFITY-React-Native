@@ -3,31 +3,33 @@ import {
     AvatarCoin,
     Title,
     Value,
-    CardPlusCoin,
-    PlusText,
     AssetLogo,
 } from './style'
 
-import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+
 import { icons } from '../../AssetsIcons/icons';
-import { theme } from '../../styles';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 
 interface CardCoinProps {
     Id: string;
     Coin: string;
     CoinValue: string;
-    percentege : string;
 }
 
-export const CardCoin = ({ Coin, Id, CoinValue,percentege }: CardCoinProps) => {
+export const CardCoin = ({ Coin, Id, CoinValue }: CardCoinProps) => {
 
     const uri = icons.find((icon) => icon.asset_id === Id)?.url
+
+    const { navigate } = useNavigation<BottomTabNavigationProp<any>>()
 
 
     return (
         <Container
             activeOpacity={0.6}
+            onPress={() => navigate('Currencies', { assetActive: Id })}
 
         >
             <AvatarCoin>
@@ -44,13 +46,6 @@ export const CardCoin = ({ Coin, Id, CoinValue,percentege }: CardCoinProps) => {
             <Value>
                 {CoinValue}
             </Value>
-            <CardPlusCoin>
-                <Entypo name={(Number(percentege) > 0) ? 'arrow-bold-up' : 'arrow-bold-down'} size={10}
-                    color={(Number(percentege) > 0) ? '#F7B502' : theme.colors.secondary} />
-                <PlusText>
-                    {percentege}
-                </PlusText>
-            </CardPlusCoin>
         </Container >
     )
 

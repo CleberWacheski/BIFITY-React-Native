@@ -7,24 +7,31 @@ import {
     DescriptionCoin,
     InformationCoin,
     TitleCoin,
+    CoinContent,
+    Percentege,
+    Status,
     MainValue,
     Container,
 
 
 } from './style';
 
+import { Entypo } from '@expo/vector-icons';
 
 
 interface CoinSectionProps {
     name: string;
     assetID: string;
     value: number;
+    percentege: string;
 }
 
 
-export const CoinSection = ({ assetID, name, value }: CoinSectionProps) => {
+export const CoinSection = ({ assetID, name, value, percentege = '10' }: CoinSectionProps) => {
 
     const uri = icons.find((icon) => icon.asset_id === assetID)!.url
+    const color = (Number(percentege) > 0) ? '#F7B502' : '#FF2CDF'
+    const percentegeFormated = (Number(percentege) >= 0) ? `+${percentege}` : `${percentege}`
 
 
     return (
@@ -50,9 +57,19 @@ export const CoinSection = ({ assetID, name, value }: CoinSectionProps) => {
                     </InformationCoin>
 
                 </DescriptionCoin>
-                <MainValue>
-                    ${value}
-                </MainValue>
+                <CoinContent>
+                    <MainValue>
+                        ${value}
+                    </MainValue>
+                    <Status>
+
+                        <Percentege color={color}>
+                            {percentegeFormated}
+                        </Percentege>
+                        <Entypo name="arrow-bold-up" size={15} color={color} />
+                    </Status>
+                </CoinContent>
+
             </Coin>
         </Container>
     )

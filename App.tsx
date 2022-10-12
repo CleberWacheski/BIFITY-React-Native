@@ -13,6 +13,7 @@ import { Routes } from './src/routes';
 import { useState } from 'react';
 import { GetStarted } from './src/pages/getStarted';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { StatusBar } from 'react-native';
 
 export default function App() {
 
@@ -39,6 +40,7 @@ export default function App() {
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
+          <StatusBar barStyle='light-content'  />
           {
             (!login) ? <GetStarted SignIn={handleSignIn} /> : <Routes />
           }

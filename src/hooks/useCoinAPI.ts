@@ -25,8 +25,6 @@ interface CoinApi {
 export interface assetsProps {
     name: string;
     assetId: string;
-    percentege: string;
-    SevenLastRates: number[];
     price: number;
 }
 
@@ -44,62 +42,76 @@ interface ExchangeRate {
 
 const ASSETS = ['BTC', 'ETH', 'XLM', 'XRP', 'ADA']
 
+const delay = () => {
+    return new Promise(resolve => setTimeout(resolve, 2000))
+}
+
+
 const today = new Date().toISOString()
 const SevenDaysBefore = new Date(new Date().setDate(new Date().getDate() - 6)).toISOString()
 
 
-async function getAssets(assetId: string[]) {
+async function getAssetStatus(assetID: string) {
 
 
-    //const { data: assetsData } = await api.get<CoinApi[]>(`assets/${assetId}`)
 
-    const endpoints = ASSETS.map((asset) => `exchangerate/${asset}/USD/history?period_id=1DAY&time_start=${SevenDaysBefore}&time_end=${today}`)
+    const { data: assetStatus } = await api.get<ExchangeRate[]>(`exchangerate/${assetID}/USD/history?period_id=1DAY&time_start=${SevenDaysBefore}&time_end=${today}`)
 
-    const data = await axios.all(endpoints.map((endpoint) => api.get(endpoint)))
+    const yesterdayValue = assetStatus[assetStatus.length - 2].rate_open
+    const todayValue = assetStatus[assetStatus.length - 1].rate_close
+    const percentege = (yesterdayValue / todayValue).toFixed(4)
 
-    const priceStatus = data.map((request) => request.data)
+    const SevenLastRates = assetStatus.reduce((acc, asset) => {
 
+        acc.push(asset.rate_close)
 
-    //const { data: priceStatus } = await api.get<ExchangeRate[]>(`exchangerate/${assetId}/USD/history?period_id=1DAY&time_start=${SevenDaysBefore}&time_end=${today}`)
+        return acc
+    }, [] as number[])
 
-    // const yesterdayValue = PriceStatus[PriceStatus.length - 2].rate_open
-    // const todayValue = PriceStatus[PriceStatus.length - 1].rate_close
+    const status = {
+        percentege,
+        SevenLastRates,
+    }
 
-    // const percentege = (yesterdayValue / todayValue).toFixed(4)
-
-    // const SevenLastRates = PriceStatus.reduce((acc, asset) => {
-
-    //     acc.push(asset.rate_close)
-
-    //     return acc
-    // }, [] as number[])
-
-
-    // const assets = assetsData.reduce((acc, asset) => {
-    //     return {
-    //         name: asset.name,
-    //         assetId: asset.asset_id,
-    //         percentege,
-    //         SevenLastRates,
-    //         price: (asset.price_usd) ? Number(asset.price_usd.toFixed(2)) : 0
-    //     }
-
-    // }, {} as assetsProps)
-
-    return JSON.stringify(priceStatus, null, 3)
+    return status
 }
 
 
+
+
+async function getAssets() {
+
+    const { data: assetsData } = await api.get<CoinApi[]>('assets', {
+        params: {
+            filter_asset_id: ASSETS.toString()
+        }
+    })
+
+    const assets = assetsData.reduce((acc, asset) => {
+
+        acc.push({
+            name: asset.name,
+            assetId: asset.asset_id,
+            price: (asset.price_usd) ? Number(asset.price_usd.toFixed(2)) : 0
+        })
+
+        return acc
+
+    }, [] as assetsProps[])
+
+    return assets
+}
+
+
+export const useStatus = (assetID: string) => {
+
+    return useQuery(['status'], () => getAssetStatus(assetID))
+}
+
 export const useAssets = () => {
 
+    return useQuery(['assets'], getAssets)
 
-    const { data, isLoading } = useQuery(['assets'], () => getAssets(ASSETS))
-
-
-    return {
-        data,
-        isLoading
-    }
 }
 
 

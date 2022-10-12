@@ -1,6 +1,10 @@
 import { RFValue } from "react-native-responsive-fontsize"
 import styled from "styled-components/native"
 
+interface PercentegeProps {
+    color : string
+}
+
 export const Container = styled.View`
     
 `
@@ -50,6 +54,31 @@ export const InitialsCoin = styled.Text`
     margin-top: -10px;
 
 `
+
+export const CoinContent = styled.View`
+
+   flex-direction: column;
+   align-items: center;
+
+
+`
+
+export const Status = styled.View`
+   width: 100%;
+   flex-direction: row;
+
+`
+
+export const Percentege = styled.Text<PercentegeProps>`
+
+    color: ${({color})=> color};
+    font-family: ${({ theme }) => theme.fonts.Bold};
+    font-size: ${RFValue(11)}px;
+    margin-top: -3px;
+    text-align: left;
+
+`
+
 
 export const MainValue = styled.Text`
     color: ${({ theme }) => theme.colors.baseline};

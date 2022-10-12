@@ -1,23 +1,22 @@
-import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Home } from '../../src/pages/Home';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import Home from '../pages/Home';
 import { assetsProps, useAssets } from "../hooks/useCoinAPI";
 import { Currencies } from "../pages/Currencies";
 import { Notifications } from "../pages/Notifications";
 import { Settings } from "../pages/Settings";
 import { theme } from "../styles";
 import { SwitchTabBarIcon } from "../utils/SwitchTabBarIcon";
-
+import { LoadingPage } from "../pages/Loading";
 
 
 export type RootTabsParamList = {
+
     Home: { assets: assetsProps[] } | undefined;
-    Currencies: { assets: assetsProps[] } | undefined;
+    Currencies: { assets: assetsProps[], assetActive: string } | undefined;
     Settings: undefined;
     Notifications: undefined;
 }
 
-
-export type ScreenProps = BottomTabScreenProps<RootTabsParamList>
 
 export const Routes = () => {
 
@@ -26,15 +25,9 @@ export const Routes = () => {
 
 
     if (isLoading) {
-        return null
+        return <LoadingPage />
     }
-    else {
 
-        console.log(data)
-
-
-        return null
-    }
 
     return (
         <Tab.Navigator
@@ -55,8 +48,8 @@ export const Routes = () => {
 
         >
 
-            <Tab.Screen name="Home" component={Home} initialParams={{ assets: data.map((data) => data.data) }} />
-            <Tab.Screen name="Currencies" component={Currencies} initialParams={{ assets: data.map((data) => data.data) }} />
+            <Tab.Screen name='Home' component={Home} initialParams={{ assets: data }} />
+            <Tab.Screen name="Currencies" component={Currencies} initialParams={{ assets: data, assetActive: 'ETH' }} />
             <Tab.Screen name="Settings" component={Settings} />
             <Tab.Screen name="Notifications" component={Notifications} />
 

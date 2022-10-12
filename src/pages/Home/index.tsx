@@ -29,15 +29,16 @@ import {
 
 import { CardCoin } from '../../components/CardCoin';
 import { NotificationsButton } from '../../components/NotificationsButton';
-import { ScreenProps } from '../../routes';
+import { RootTabsParamList } from '../../routes';
 import { FlashList } from '@shopify/flash-list';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 
+type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Home'>
 
-export const Home = ({ navigation, route }: ScreenProps) => {
+const Home = ({ navigation, route }: ScreenProps) => {
 
-    const assets = route.params!.assets
-
+    const assets = route.params?.assets
 
 
     return (
@@ -110,7 +111,6 @@ export const Home = ({ navigation, route }: ScreenProps) => {
                                     Coin={item.name}
                                     Id={item.assetId}
                                     CoinValue={`$${item.price}`}
-                                    percentege={item.percentege}
                                 />
                             )
                         }}
@@ -123,3 +123,5 @@ export const Home = ({ navigation, route }: ScreenProps) => {
         </Container>
     )
 }
+
+export default Home
