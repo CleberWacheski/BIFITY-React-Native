@@ -34,10 +34,11 @@ export const Routes = ({ data }: RoutesParamsProps) => {
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    backgroundColor: '#211E41',
+                    backgroundColor: theme.colors.primary,
                     borderTopWidth: 0,
                     height: 45,
                 },
+                
                 tabBarActiveTintColor: theme.colors.secondary,
                 tabBarInactiveTintColor: theme.colors.baseline,
             })}

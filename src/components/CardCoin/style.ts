@@ -3,7 +3,7 @@ import styled from "styled-components/native"
 
 export const Container = styled.TouchableOpacity`
 
-    background-color: #211E41;
+    background-color: ${({theme})=> theme.colors.primary_card};
     width: 150px;
     padding: 15px 20px;
     border-radius: 10px;
@@ -12,7 +12,7 @@ export const Container = styled.TouchableOpacity`
 `
 
 export const AvatarCoin = styled.View`
-    background-color: #12111E;
+    background-color: ${({theme})=> theme.colors.card_detail};
     padding: 15px;
     border-radius: 100px;
     margin-bottom: 8px;
@@ -26,14 +26,14 @@ export const AssetLogo = styled.Image`
 `
 
 export const Title = styled.Text`
-     color: #A7A7A7;
+     color: ${({theme})=> theme.colors.text_detail};
     font-family: ${({ theme }) => theme.fonts.SemiBold};
     font-size: ${RFValue(10)}px;
 
 `
 export const Value = styled.Text`
     margin-top: -6px;
-     color: ${({ theme }) => theme.colors.baseline};
+     color: ${({ theme }) => theme.colors.text_value};
     font-family: ${({ theme }) => theme.fonts.Bold};
     font-size: ${RFValue(10)}px;
 

@@ -17,6 +17,7 @@ import {
 } from './style';
 
 import { Entypo } from '@expo/vector-icons';
+import { useTheme } from 'styled-components';
 
 
 interface CoinSectionProps {
@@ -29,8 +30,10 @@ interface CoinSectionProps {
 
 export const CoinSection = ({ assetID, name, value, percentege = '10' }: CoinSectionProps) => {
 
+    const theme = useTheme()
+
     const uri = icons.find((icon) => icon.asset_id === assetID)!.url
-    const color = (Number(percentege) > 0) ? '#F7B502' : '#FF2CDF'
+    const color = (Number(percentege) > 0) ? theme.colors.plus_color : theme.colors.secondary
     const percentegeFormated = (Number(percentege) >= 0) ? `+${percentege}` : `${percentege}`
 
 

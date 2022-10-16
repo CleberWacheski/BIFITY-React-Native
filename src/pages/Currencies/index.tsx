@@ -1,7 +1,7 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { FlashList } from "@shopify/flash-list"
 import { useEffect, useState } from "react"
-import { Dimensions, ActivityIndicator, View } from "react-native"
+import { Dimensions, ActivityIndicator } from "react-native"
 import { LineChart } from "react-native-chart-kit"
 import { useTheme } from "styled-components"
 import { BackPage } from "../../components/BackPage"
@@ -10,7 +10,6 @@ import { InicialsCoinSelect } from "../../components/InicialsCoinSelect"
 import { NotificationsButton } from "../../components/NotificationsButton"
 import { useStatus } from "../../hooks/useCoinAPI"
 import { RootTabsParamList } from "../../routes/routes"
-import { DARK_THEME } from '../../styles/index'
 import { SortDays } from "../../utils/OrdenationDays"
 
 import {
@@ -62,6 +61,7 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
                 data={assets}
                 keyExtractor={coin => coin.assetId}
                 estimatedItemSize={5}
+                showsHorizontalScrollIndicator={false}
                 extraData={assetActive}
                 renderItem={({ item }) => {
                     return (
@@ -100,7 +100,8 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
                                 labels: SortDays(),
                                 datasets: [
                                     {
-                                        data: (!!data) ? data.SevenLastRates : [1, 2, 3]
+                                        data: (!!data) ? data.SevenLastRates : [1, 2, 3],
+
                                     }
                                 ]
                             }}
@@ -112,7 +113,6 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
                             withDots={false}
                             withVerticalLines={false}
                             withHorizontalLines={false}
-
                             transparent
                             chartConfig={{
                                 decimalPlaces: 0,
@@ -121,14 +121,14 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
                                 fillShadowGradient: theme.colors.secondary,
 
                                 color: (opacity = 1) => theme.colors.secondary,
-                                labelColor: (opacity = 0.1) => `rgba(255, 255, 255, ${opacity})`,
+                                labelColor: (opacity = 0.1) => theme.colors.baseline,
                                 style: {
                                     borderRadius: 16
                                 },
                             }}
                             style={{
                                 marginVertical: 8,
-                                borderRadius: 16
+                                borderRadius: 16,
                             }}
                         />
                     </ChartContent>

@@ -48,7 +48,7 @@ export const TitleCoin = styled.Text`
 
 `
 export const InitialsCoin = styled.Text`
-    color: #6C757D;
+    color: ${({theme})=> theme.colors.baseline};
     font-family: ${({ theme }) => theme.fonts.Regular};
     font-size: ${RFValue(12)}px;
     margin-top: -10px;

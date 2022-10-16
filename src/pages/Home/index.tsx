@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
 import {
@@ -23,6 +24,8 @@ import {
     List,
     DescriptionAssets,
     TitleAssets,
+    AddCashContainer,
+    AddCash,
 
 
 } from './style';
@@ -33,6 +36,7 @@ import { RootTabsParamList } from '../../routes/routes';
 import { FlashList } from '@shopify/flash-list';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { UserContext } from '../../contexts/userContext';
+import { useTheme } from 'styled-components';
 
 
 type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Home'>
@@ -41,6 +45,8 @@ const Home = ({ navigation, route }: ScreenProps) => {
 
     const assets = route.params?.assets
     const { user } = useContext(UserContext)
+    const userImageUrl = user.picture.replace("s96-c", "s500-c");
+    const theme = useTheme()
 
 
     return (
@@ -49,7 +55,7 @@ const Home = ({ navigation, route }: ScreenProps) => {
                 <HeaderContent>
                     <Avatar
                         source={{
-                            uri: user.picture
+                            uri: userImageUrl
                         }}
                     />
                     <Text>
@@ -121,6 +127,22 @@ const Home = ({ navigation, route }: ScreenProps) => {
                 </List>
             </Assets>
 
+            <AddCashContainer>
+                <AddCash>
+
+                    <FontAwesome5 name="coins" size={32} color={theme.colors.secondary} />
+                    <Ionicons name="add-circle" size={22} color={theme.colors.secondary}
+                        style={{
+                            transform : [{
+                                translateY: 10,
+                            },{
+                                translateX : -6
+                            }]
+                            
+                        }}
+                    />
+                </AddCash>
+            </AddCashContainer>
 
         </Container>
     )

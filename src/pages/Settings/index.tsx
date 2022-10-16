@@ -15,14 +15,17 @@ import {
 export const Settings = () => {
 
     const { user } = useContext(UserContext)
+    
+    const userImageUrl = user.picture.replace("s96-c", "s500-c");
 
+    console.log(user.picture)
 
     return (
         <Container>
             <ProfileContent>
                 <Avatar
                     source={{
-                        uri: user.picture
+                        uri: userImageUrl
                     }}
                 />
                 <UserName>Cleber Wacheski</UserName>
@@ -36,7 +39,7 @@ export const Settings = () => {
             <SwitchComponent
                 settign="DARK/LIGHT MODE"
             />
-           
+
 
         </Container>
     )
