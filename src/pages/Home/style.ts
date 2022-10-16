@@ -21,15 +21,15 @@ export const HeaderContent = styled.View`
     align-items: center;
 `
 export const Avatar = styled.Image`
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 25px;
     margin-right: 10px;
 `
 export const Text = styled.Text`
     color: ${({ theme }) => theme.colors.secondary};
     font-family: ${({ theme }) => theme.fonts.Bold};
-    font-size: ${RFValue(13)}px;
+    font-size: ${RFValue(15)}px;
 `
 export const Balance = styled.View`
     margin-top: 20px;

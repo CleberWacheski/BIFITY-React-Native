@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { SwitchComponent } from "../../components/SwitchComponent";
+import { UserContext } from "../../contexts/userContext";
 
 import {
     Container,
@@ -12,13 +14,15 @@ import {
 
 export const Settings = () => {
 
+    const { user } = useContext(UserContext)
+
 
     return (
         <Container>
             <ProfileContent>
                 <Avatar
                     source={{
-                        uri: 'https://avatars.githubusercontent.com/u/94264158?v=4'
+                        uri: user.picture
                     }}
                 />
                 <UserName>Cleber Wacheski</UserName>
@@ -33,7 +37,6 @@ export const Settings = () => {
                 settign="DARK/LIGHT MODE"
             />
            
-
 
         </Container>
     )

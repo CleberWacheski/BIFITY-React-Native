@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -29,9 +29,10 @@ import {
 
 import { CardCoin } from '../../components/CardCoin';
 import { NotificationsButton } from '../../components/NotificationsButton';
-import { RootTabsParamList } from '../../routes';
+import { RootTabsParamList } from '../../routes/routes';
 import { FlashList } from '@shopify/flash-list';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { UserContext } from '../../contexts/userContext';
 
 
 type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Home'>
@@ -39,6 +40,7 @@ type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Home'>
 const Home = ({ navigation, route }: ScreenProps) => {
 
     const assets = route.params?.assets
+    const { user } = useContext(UserContext)
 
 
     return (
@@ -47,11 +49,11 @@ const Home = ({ navigation, route }: ScreenProps) => {
                 <HeaderContent>
                     <Avatar
                         source={{
-                            uri: 'https://avatars.githubusercontent.com/u/94264158?v=4'
+                            uri: user.picture
                         }}
                     />
                     <Text>
-                        WELLCOME BACK
+                        {user.name}
                     </Text>
                 </HeaderContent>
                 <NotificationsButton />

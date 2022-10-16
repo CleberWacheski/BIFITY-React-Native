@@ -1,12 +1,14 @@
 import { Switch } from "react-native"
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
 import {
     Container,
     SettignName
 
 
 } from "./style";
-import { theme } from "../../styles";
+import { useTheme } from "styled-components";
+import { themeContext } from "../../contexts/themeContext";
 
 interface SwitchComponentProps {
     settign: string;
@@ -14,8 +16,16 @@ interface SwitchComponentProps {
 
 export const SwitchComponent = ({ settign }: SwitchComponentProps) => {
 
+    const { setThemeMode} = useContext(themeContext)
+
+    const theme = useTheme()
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState)
+
+    useEffect(()=> {
+        setThemeMode(isEnabled)
+
+    },[isEnabled])
 
     return (
         <Container>

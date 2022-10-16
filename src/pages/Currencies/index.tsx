@@ -3,13 +3,14 @@ import { FlashList } from "@shopify/flash-list"
 import { useEffect, useState } from "react"
 import { Dimensions, ActivityIndicator, View } from "react-native"
 import { LineChart } from "react-native-chart-kit"
+import { useTheme } from "styled-components"
 import { BackPage } from "../../components/BackPage"
 import { CoinSection } from "../../components/CoinSection"
 import { InicialsCoinSelect } from "../../components/InicialsCoinSelect"
 import { NotificationsButton } from "../../components/NotificationsButton"
 import { useStatus } from "../../hooks/useCoinAPI"
-import { RootTabsParamList } from "../../routes"
-import { theme } from '../../styles/index'
+import { RootTabsParamList } from "../../routes/routes"
+import { DARK_THEME } from '../../styles/index'
 import { SortDays } from "../../utils/OrdenationDays"
 
 import {
@@ -24,6 +25,8 @@ import {
 type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Currencies'>
 
 export const Currencies = ({ navigation, route }: ScreenProps) => {
+
+    const theme = useTheme() 
 
     const assets = route.params!.assets
     const [assetActive, setAssetActive] = useState(route.params!.assetActive)

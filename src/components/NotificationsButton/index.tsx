@@ -1,11 +1,13 @@
 import { NotificationButton } from "./style"
-import { theme } from '../../styles';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
-import {RootTabsParamList} from '../../routes/index'
+import {RootTabsParamList} from '../../routes/routes'
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from "styled-components";
 
 export const NotificationsButton = () => {
+
+    const theme = useTheme()
 
     const {navigate} = useNavigation<BottomTabNavigationProp<RootTabsParamList>>()
 

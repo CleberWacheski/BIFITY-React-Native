@@ -18,6 +18,7 @@ export const Avatar = styled.Image`
   height: 150px;
   width: 150px;
   border-radius: 75px;
+  object-fit : cover;
 
 
 `

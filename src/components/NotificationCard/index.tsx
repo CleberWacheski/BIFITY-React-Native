@@ -7,7 +7,7 @@ import {
 } from './style'
 
 import { FontAwesome } from '@expo/vector-icons';
-import { theme } from '../../styles';
+import { useTheme } from 'styled-components';
 
 interface NotificationCardProps {
     newNotification: boolean;
@@ -19,6 +19,7 @@ interface NotificationCardProps {
 
 export const NotificationCard = ({ newNotification, DateNotitification, textNotitification }: NotificationCardProps) => {
 
+    const theme = useTheme()
     const color = (newNotification) ? theme.colors.secondary : theme.colors.baseline
 
 

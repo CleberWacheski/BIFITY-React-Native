@@ -1,6 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient"
 import { StatusBar, TouchableOpacity } from "react-native"
-import { theme } from "../../styles"
 import Logo from '../../../assets/Logo.svg'
 
 import {
@@ -12,16 +11,34 @@ import {
     Text,
     TextButton
 } from "./style"
+import { SignInWithGoogle } from "../../Oauth/SignInWithGoogle"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/userContext"
+import { useTheme } from 'styled-components'
+
 
 interface GetStartedProps {
-    SignIn: () => void
+    handleAuthenticated: () => void;
 }
 
-
-export const GetStarted = ({ SignIn }: GetStartedProps) => {
-
+export const GetStarted = ({ handleAuthenticated }: GetStartedProps) => {
 
 
+    const theme = useTheme() 
+
+    const { handleSetUser } = useContext(UserContext)
+
+
+    async function SignIn() {
+
+        const user = await SignInWithGoogle()
+
+        if (user?.name) {
+            handleSetUser(user)
+            handleAuthenticated()
+        }
+
+    }
 
     return (
         <LinearGradient
