@@ -1,7 +1,4 @@
 import React, { useContext } from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-
 
 import {
     Container,
@@ -9,25 +6,10 @@ import {
     HeaderContent,
     Avatar,
     Text,
-    Balance,
-    TotalBalance,
-    Description,
-    Value,
-    PercentegeCard,
-    Percentege,
-    ProfitCard,
-    ProfitContent,
-    ProfitDescription,
-    ProfitValue,
-    ProfitPercentege,
     Assets,
     List,
     DescriptionAssets,
     TitleAssets,
-    AddCashContainer,
-    AddCash,
-
-
 } from './style';
 
 import { CardCoin } from '../../components/CardCoin';
@@ -36,7 +18,8 @@ import { RootTabsParamList } from '../../routes/routes';
 import { FlashList } from '@shopify/flash-list';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { UserContext } from '../../contexts/userContext';
-import { useTheme } from 'styled-components';
+import { BalanceComponent } from '../../components/BalanceComponet';
+import { AddCashButton } from '../../components/AddCashButton';
 
 
 type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Home'>
@@ -46,8 +29,7 @@ const Home = ({ navigation, route }: ScreenProps) => {
     const assets = route.params?.assets
     const { user } = useContext(UserContext)
     const userImageUrl = user.picture.replace("s96-c", "s500-c");
-    const theme = useTheme()
-
+  
 
     return (
         <Container>
@@ -65,40 +47,7 @@ const Home = ({ navigation, route }: ScreenProps) => {
                 <NotificationsButton />
             </Header>
 
-            <Balance>
-                <TotalBalance>
-                    <Description>
-                        Total balance
-                    </Description>
-                    <Value>
-                        $13450.00
-                    </Value>
-                </TotalBalance>
-                <PercentegeCard>
-                    <Percentege>
-                        <Ionicons
-                            name="caret-up-sharp"
-                            size={12}
-                            color="#9BFFF2"
-                        />
-                        +15%
-                    </Percentege>
-                </PercentegeCard>
-            </Balance>
-
-            <ProfitCard>
-                <ProfitContent>
-                    <ProfitDescription>
-                        Profit
-                    </ProfitDescription>
-                    <ProfitValue>
-                        $13250.00
-                    </ProfitValue>
-                </ProfitContent>
-                <ProfitPercentege>
-                    5.7%
-                </ProfitPercentege>
-            </ProfitCard>
+            <BalanceComponent />
 
             <Assets>
                 <DescriptionAssets>
@@ -127,22 +76,7 @@ const Home = ({ navigation, route }: ScreenProps) => {
                 </List>
             </Assets>
 
-            <AddCashContainer>
-                <AddCash>
-
-                    <FontAwesome5 name="coins" size={32} color={theme.colors.secondary} />
-                    <Ionicons name="add-circle" size={22} color={theme.colors.secondary}
-                        style={{
-                            transform : [{
-                                translateY: 10,
-                            },{
-                                translateX : -6
-                            }]
-                            
-                        }}
-                    />
-                </AddCash>
-            </AddCashContainer>
+            <AddCashButton />
 
         </Container>
     )
