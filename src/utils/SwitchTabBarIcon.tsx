@@ -1,4 +1,5 @@
 import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface SwitchTabBarIconProps {
     route: string;
@@ -12,28 +13,31 @@ interface SwitchTabBarIconProps {
 
 
 export const SwitchTabBarIcon = ({ TabBarIcon, route }: SwitchTabBarIconProps) => {
-    const {color,focused,size} = TabBarIcon
+    const { color, focused, size } = TabBarIcon
     let name;
 
     switch (route) {
-        case ('Home') : {
+        case ('Home'): {
             name = 'home'
-           
+
         }
-        break;
-        case ('Currencies') : {
+            break;
+        case ('Currencies'): {
             name = 'coins'
         }
-        break;
-        case ('Settings') : {
+            break;
+        case ('Settings'): {
             name = "cog"
         };
-        break;
-        case ('Notifications') : {
+            break;
+        case ('Notifications'): {
             name = "bell"
         };
-        break;
-        default : return null
+            break;
+        case ('AddCash'): {
+            return <MaterialCommunityIcons name="cash-plus" size={30} color={color} />
+        }
+        default: return null
     }
 
     return <FontAwesome5 name={name} size={24} color={color} />

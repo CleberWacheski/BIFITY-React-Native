@@ -1,13 +1,6 @@
 import styled from "styled-components/native"
 
-export const AddCashContainer = styled.View`
 
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-
-`
 
 export const AddCash = styled.TouchableOpacity`
 

@@ -52,9 +52,13 @@ export const DescriptionAssets = styled.View`
 
 `
 export const TitleAssets = styled.Text`
-    color: ${({theme})=> theme.colors.baseline};
-    font-family: ${({theme})=> theme.fonts.Bold};
+    color: ${({ theme }) => theme.colors.baseline};
+    font-family: ${({ theme }) => theme.fonts.Bold};
     font-size: ${RFValue(13)}px;
 
 `
 
+export const ContentButtonAdd = styled.View`
+
+    margin: 23px 0 0 20px;
+`

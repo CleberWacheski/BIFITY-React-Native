@@ -10,6 +10,7 @@ import {
     List,
     DescriptionAssets,
     TitleAssets,
+    ContentButtonAdd,
 } from './style';
 
 import { CardCoin } from '../../components/CardCoin';
@@ -29,7 +30,7 @@ const Home = ({ navigation, route }: ScreenProps) => {
     const assets = route.params?.assets
     const { user } = useContext(UserContext)
     const userImageUrl = user.picture.replace("s96-c", "s500-c");
-  
+
 
     return (
         <Container>
@@ -76,7 +77,13 @@ const Home = ({ navigation, route }: ScreenProps) => {
                 </List>
             </Assets>
 
-            <AddCashButton />
+            <ContentButtonAdd>
+                <AddCashButton
+                    onPress={() => navigation.navigate('AddCash')}
+
+                />
+            </ContentButtonAdd>
+
 
         </Container>
     )

@@ -11,7 +11,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { StatusBar } from 'react-native';
 import { UserContextProvider } from './src/contexts/userContext';
 import { ThemeContextProvider } from './src/contexts/themeContext';
-import { AddCash } from './src/pages/AddCash/index';
 
 
 export default function App() {
@@ -36,7 +35,7 @@ export default function App() {
         <StatusBar barStyle='light-content' />
         <UserContextProvider>
           <ThemeContextProvider>
-            <AddCash />
+            <Pages />
           </ThemeContextProvider>
         </UserContextProvider>
       </QueryClientProvider>

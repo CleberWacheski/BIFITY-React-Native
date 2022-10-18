@@ -6,12 +6,14 @@ import { Notifications } from "../pages/Notifications";
 import { Settings } from "../pages/Settings";
 import { SwitchTabBarIcon } from "../utils/SwitchTabBarIcon";
 import { useTheme } from "styled-components";
+import { AddCash } from "../pages/AddCash";
 
 
 export type RootTabsParamList = {
 
     Home: { assets: assetsProps[] } | undefined;
     Currencies: { assets: assetsProps[], assetActive: string } | undefined;
+    AddCash: undefined;
     Settings: undefined;
     Notifications: undefined;
 }
@@ -38,14 +40,15 @@ export const Routes = ({ data }: RoutesParamsProps) => {
                     borderTopWidth: 0,
                     height: 45,
                 },
-                
+
                 tabBarActiveTintColor: theme.colors.secondary,
                 tabBarInactiveTintColor: theme.colors.baseline,
             })}
-
+       
         >
 
             <Tab.Screen name='Home' component={Home} initialParams={{ assets: data }} />
+            <Tab.Screen name="AddCash" component={AddCash}/>
             <Tab.Screen name="Currencies" component={Currencies} initialParams={{ assets: data, assetActive: 'ETH' }} />
             <Tab.Screen name="Settings" component={Settings} />
             <Tab.Screen name="Notifications" component={Notifications} />
