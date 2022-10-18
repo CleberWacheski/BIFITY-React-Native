@@ -11,6 +11,7 @@ export const Container = styled(TouchableOpacity)`
     justify-content: flex-start;
     width: 100%;
     border-radius: 10px;
+    margin-bottom: 20px;
     
 `
 export const Coin = styled.View`

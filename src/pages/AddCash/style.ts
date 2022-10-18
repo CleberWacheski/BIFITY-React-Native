@@ -1,6 +1,6 @@
 import { RFValue } from "react-native-responsive-fontsize"
 import styled from "styled-components/native"
-import { TextInput, TouchableOpacity } from 'react-native'
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 
 
 
@@ -48,7 +48,7 @@ export const Input = styled(TextInput)`
 
 `
 
-export const Select = styled(TouchableOpacity)`
+export const Select = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -58,7 +58,6 @@ export const Select = styled(TouchableOpacity)`
     align-self: center;
     padding: 12px 15px;
     border-radius: 8px;
-
     
 `
 export const SelectContent = styled.View`

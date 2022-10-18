@@ -1,3 +1,4 @@
+import { icons } from "../../AssetsIcons/icons";
 import {
     AssetLogo,
     Coin,
@@ -8,8 +9,15 @@ import {
     InitialsCoin,
 } from "./style"
 
+interface CoinModalProps {
+    name: string;
+    Id: string;
+}
 
-export const SelectCoinModal = () => {
+
+export const SelectCoinModal = ({ Id, name }: CoinModalProps) => {
+
+    const uri = icons.find((asset) => asset.asset_id === Id)!.url
 
     return (
         <Container>
@@ -17,16 +25,16 @@ export const SelectCoinModal = () => {
                 <LogoContent>
                     <AssetLogo
                         source={{
-                            uri: 'https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_512/6113eae75525442485b593d9e42d18f6.png'
+                            uri
                         }}
 
                     />
                 </LogoContent>
             </Coin>
             <DescriptionCoin>
-                <TitleCoin>TESTE</TitleCoin>
+                <TitleCoin>{name}</TitleCoin>
                 <InitialsCoin>
-                    TST
+                    {Id}
                 </InitialsCoin>
 
             </DescriptionCoin>
