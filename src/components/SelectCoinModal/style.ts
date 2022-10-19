@@ -1,10 +1,9 @@
 import styled from "styled-components/native";
-import { TouchableOpacity } from 'react-native'
 import { RFValue } from "react-native-responsive-fontsize";
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled.TouchableOpacity`
 
-    background-color: ${({theme})=> theme.colors.primary_card};
+    background-color: ${({ theme }) => theme.colors.primary_card};
     padding: 10px;
     flex-direction: row;
     align-items: center;

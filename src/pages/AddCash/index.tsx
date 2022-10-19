@@ -30,13 +30,18 @@ type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'AddCash'>
 
 export const AddCash = ({ navigation, route }: ScreenProps) => {
 
-    const uri = icons.find((coin) => coin.asset_id === 'BTC')!.url
+    const uri = icons.find((coin) => coin.asset_id === route.params!.assetActive.id)!.url
+
     const assets = route.params!.assets
     const [modalVisible, setModalVisible] = useState(false);
-
-    const assetActive = route.params?.assetActive ?? { name: 'Bitcoin', Id: 'BTC' }
+    const assetActive = route.params!.assetActive 
 
     const theme = useTheme()
+
+
+    function handleSetVisibleModal() {
+        setModalVisible(false)
+    }
 
     return (
         <Container>
@@ -56,13 +61,13 @@ export const AddCash = ({ navigation, route }: ScreenProps) => {
 
 
             <TouchableOpacity
-                onPress={() => setModalVisible(state => !state)}
+                onPress={() => setModalVisible(true)}
             >
                 <Select>
                     <SelectContent>
                         <Logo
                             source={{
-                                uri
+                                uri 
                             }}
                         />
                         <TextSelect>
@@ -80,6 +85,7 @@ export const AddCash = ({ navigation, route }: ScreenProps) => {
             <ModalComponent
                 visible={modalVisible}
                 assets={assets}
+                setModalVisible={handleSetVisibleModal}
             />
 
         </Container >
