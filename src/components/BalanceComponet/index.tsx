@@ -15,16 +15,22 @@ import {
 
 import { Ionicons } from '@expo/vector-icons';
 
-export const BalanceComponent = () => {
+interface BalanceComponentProps {
+    balanceValue: number;
+    profitValue: number;
+}
+
+export const BalanceComponent = ({ balanceValue, profitValue }: BalanceComponentProps) => {
+
     return (
         <Container>
             <Balance>
                 <TotalBalance>
                     <Description>
                         Total balance
-                    </Description>
+                    </Description> 
                     <Value>
-                        $13450.00
+                        $ {balanceValue}
                     </Value>
                 </TotalBalance>
                 <PercentegeCard>
@@ -45,7 +51,7 @@ export const BalanceComponent = () => {
                         Profit
                     </ProfitDescription>
                     <ProfitValue>
-                        $13250.00
+                        $ {profitValue}
                     </ProfitValue>
                 </ProfitContent>
                 <ProfitPercentege>

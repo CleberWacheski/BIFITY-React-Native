@@ -21,6 +21,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { UserContext } from '../../contexts/userContext';
 import { BalanceComponent } from '../../components/BalanceComponet';
 import { AddCashButton } from '../../components/AddCashButton';
+import { BalanceAndProfitContent } from '../../contexts/BalanceAndProfitContent';
 
 
 type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Home'>
@@ -30,6 +31,7 @@ const Home = ({ navigation, route }: ScreenProps) => {
     const assets = route.params?.assets
     const { user } = useContext(UserContext)
     const userImageUrl = user.picture.replace("s96-c", "s500-c");
+    const { sumaryBalance, sumaryProfit } = useContext(BalanceAndProfitContent)
 
 
     return (
@@ -48,7 +50,10 @@ const Home = ({ navigation, route }: ScreenProps) => {
                 <NotificationsButton />
             </Header>
 
-            <BalanceComponent />
+            <BalanceComponent
+                balanceValue={sumaryBalance}
+                profitValue={sumaryProfit}
+            />
 
             <Assets>
                 <DescriptionAssets>
