@@ -40,7 +40,7 @@ interface BalanceProps {
 
 export const AddCash = ({ navigation, route }: ScreenProps) => {
 
-    const { addNewBalanceDate, sumaryBalance, sumaryProfit } = useContext(BalanceAndProfitContent)
+    const { addNewBalanceDate, sumaryBalance, sumaryProfit, percenteges } = useContext(BalanceAndProfitContent)
 
     const uri = icons.find((coin) => coin.asset_id === route.params!.assetActive.id)!.url
 
@@ -89,6 +89,7 @@ export const AddCash = ({ navigation, route }: ScreenProps) => {
             <BalanceComponent
                 balanceValue={sumaryBalance}
                 profitValue={sumaryProfit}
+                balancePercentege={percenteges.balance}
             />
 
             <Label>Enter the value</Label>

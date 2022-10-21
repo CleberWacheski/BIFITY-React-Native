@@ -18,9 +18,11 @@ import { Ionicons } from '@expo/vector-icons';
 interface BalanceComponentProps {
     balanceValue: number;
     profitValue: number;
+    balancePercentege: number;
 }
 
-export const BalanceComponent = ({ balanceValue, profitValue }: BalanceComponentProps) => {
+export const BalanceComponent = ({ balanceValue, profitValue, balancePercentege }: BalanceComponentProps) => {
+
 
     return (
         <Container>
@@ -28,7 +30,7 @@ export const BalanceComponent = ({ balanceValue, profitValue }: BalanceComponent
                 <TotalBalance>
                     <Description>
                         Total balance
-                    </Description> 
+                    </Description>
                     <Value>
                         $ {balanceValue}
                     </Value>
@@ -40,7 +42,7 @@ export const BalanceComponent = ({ balanceValue, profitValue }: BalanceComponent
                             size={12}
                             color="#9BFFF2"
                         />
-                        +15%
+                        {balancePercentege}%
                     </Percentege>
                 </PercentegeCard>
             </Balance>
