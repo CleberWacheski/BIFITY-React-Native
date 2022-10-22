@@ -77,11 +77,3 @@ export const ProfitValue = styled.Text`
     font-family: ${({ theme }) => theme.fonts.SemiBold};
 
 `
-
-export const ProfitPercentege = styled.Text`
-    color: ${({ theme }) => theme.colors.text_value};
-    font-size: ${RFValue(10)}px;
-    font-family: ${({ theme }) => theme.fonts.Regular};
-    margin-bottom: 5px;
-
-`

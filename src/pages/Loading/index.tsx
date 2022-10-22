@@ -23,14 +23,13 @@ export const LoadingPage = () => {
         }
     }
 
-
     if (!isLoading) {
         return <Routes data={data} />
     }
     else {
         DelayLoading()
 
-        
+
         return (
             <Container>
 

@@ -31,7 +31,8 @@ const Home = ({ navigation, route }: ScreenProps) => {
     const assets = route.params?.assets
     const { user } = useContext(UserContext)
     const userImageUrl = user.picture.replace("s96-c", "s500-c");
-    const { sumaryBalance, sumaryProfit } = useContext(BalanceAndProfitContent)
+    
+    const { summary } = useContext(BalanceAndProfitContent)
 
 
     return (
@@ -51,8 +52,9 @@ const Home = ({ navigation, route }: ScreenProps) => {
             </Header>
 
             <BalanceComponent
-                balanceValue={sumaryBalance}
-                profitValue={sumaryProfit}
+                balanceValue={summary.balance}
+                profitValue={summary.profit}
+                balancePercentege={summary.balancePercentege}
             />
 
             <Assets>

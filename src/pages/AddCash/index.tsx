@@ -19,7 +19,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { icons } from '../../AssetsIcons/icons';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ModalComponent } from '../../components/Modal';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { RootTabsParamList } from '../../routes/routes';
@@ -40,7 +40,7 @@ interface BalanceProps {
 
 export const AddCash = ({ navigation, route }: ScreenProps) => {
 
-    const { addNewBalanceDate, sumaryBalance, sumaryProfit, percenteges } = useContext(BalanceAndProfitContent)
+    const { addNewBalanceDate, getBalanceData, summary, balance } = useContext(BalanceAndProfitContent)
 
     const uri = icons.find((coin) => coin.asset_id === route.params!.assetActive.id)!.url
 
@@ -55,6 +55,12 @@ export const AddCash = ({ navigation, route }: ScreenProps) => {
     function handleSetVisibleModal() {
         setModalVisible(false)
     }
+
+    useEffect(() => {
+        getBalanceData(assets)
+    }, [balance])
+
+
 
     function handleCreateNewDataBalance() {
 
@@ -87,9 +93,9 @@ export const AddCash = ({ navigation, route }: ScreenProps) => {
                 ADD YOUR CASH
             </Title>
             <BalanceComponent
-                balanceValue={sumaryBalance}
-                profitValue={sumaryProfit}
-                balancePercentege={percenteges.balance}
+                balanceValue={summary.balance}
+                profitValue={summary.profit}
+                balancePercentege={summary.balancePercentege}
             />
 
             <Label>Enter the value</Label>

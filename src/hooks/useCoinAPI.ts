@@ -42,10 +42,6 @@ interface ExchangeRate {
 
 const ASSETS = ['BTC', 'ETH', 'XLM', 'XRP', 'ADA']
 
-const delay = () => {
-    return new Promise(resolve => setTimeout(resolve, 2000))
-}
-
 
 const today = new Date().toISOString()
 const SevenDaysBefore = new Date(new Date().setDate(new Date().getDate() - 6)).toISOString()
