@@ -1,5 +1,5 @@
 import { TouchableOpacityProps } from "react-native";
-import { icons } from "../../AssetsIcons/icons";
+import { getAssetIcon } from "../../utils/getAssetIcon";
 import {
     AssetLogo,
     Coin,
@@ -18,7 +18,7 @@ interface CoinModalProps extends TouchableOpacityProps {
 
 export const SelectCoin = ({ Id, name, ...rest }: CoinModalProps) => {
 
-    const uri = icons.find((asset) => asset.asset_id === Id)!.url
+    const uri = getAssetIcon(Id)
 
     return (
         <Container {...rest}>

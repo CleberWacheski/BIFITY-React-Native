@@ -8,8 +8,7 @@ import {
 
 import { useNavigation } from '@react-navigation/native';
 
-
-import { icons } from '../../AssetsIcons/icons';
+import {getAssetIcon} from '../../utils/getAssetIcon'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 
@@ -21,7 +20,7 @@ interface CardCoinProps {
 
 export const CardCoin = ({ Coin, Id, CoinValue }: CardCoinProps) => {
 
-    const uri = icons.find((icon) => icon.asset_id === Id)?.url
+    const uri = getAssetIcon(Id)
 
     const { navigate } = useNavigation<BottomTabNavigationProp<any>>()
 

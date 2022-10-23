@@ -15,7 +15,7 @@ export type RootTabsParamList = {
     Currencies: { assets: assetsProps[], assetActive: string } | undefined;
     AddCash: { assets: assetsProps[], assetActive: { name: string, id: string }} | undefined;
     Settings: undefined;
-    Notifications: undefined;
+    //Notifications: undefined;
 }
 
 interface RoutesParamsProps {

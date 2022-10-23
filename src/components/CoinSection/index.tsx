@@ -1,4 +1,3 @@
-import { icons } from '../../AssetsIcons/icons';
 import {
     InitialsCoin,
     Coin,
@@ -13,11 +12,11 @@ import {
     MainValue,
     Container,
 
-
 } from './style';
 
 import { Entypo } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
+import { getAssetIcon } from '../../utils/getAssetIcon';
 
 
 interface CoinSectionProps {
@@ -32,7 +31,7 @@ export const CoinSection = ({ assetID, name, value, percentege = '10' }: CoinSec
 
     const theme = useTheme()
 
-    const uri = icons.find((icon) => icon.asset_id === assetID)!.url
+    const uri = getAssetIcon(assetID)
     const color = (Number(percentege) > 0) ? theme.colors.plus_color : theme.colors.secondary
     const percentegeFormated = (Number(percentege) >= 0) ? `+${percentege}` : `${percentege}`
 
