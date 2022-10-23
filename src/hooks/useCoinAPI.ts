@@ -40,7 +40,11 @@ interface ExchangeRate {
 }
 
 
-const ASSETS = ['BTC', 'ETH', 'XLM', 'XRP', 'ADA']
+const ASSETS = ['BTC', 'ETH', 'XLM', 'XRP', 'ADA',
+'USDT','USDC','BNB','XRP','BUSD','SOL','DOGE','MATIC',
+'DOT','HEX','TRX','SHIB','WBTC','AVAX','UNI','LEO','LTC','LINK',
+'ATOM','FTT','CRO','XMR','NEAR','ALGO','BCH','QNT','BTCB','TON','VET','FIL','FLOW',
+'LUNC','APE','FRAX','HBAR','HT','EGLD','ICP','XCN','XTZ','AAVE','BKM','$DOSA','GLB','EARN','WEB3','CRAMER','SKELETON','LUNC','SHIB']
 
 
 const today = new Date().toISOString()

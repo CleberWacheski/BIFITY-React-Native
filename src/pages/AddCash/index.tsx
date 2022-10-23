@@ -1,6 +1,6 @@
 import { AddCashButton } from '../../components/AddCashButton'
-import { BalanceComponent } from '../../components/BalanceComponet'
-
+import { BalanceComponent } from '../../components/BalanceComponent'
+import { v4 as uuidV4 } from 'uuid'
 
 import {
     Container,
@@ -20,10 +20,10 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { icons } from '../../AssetsIcons/icons';
 import { useContext, useEffect, useState } from 'react';
-import { ModalComponent } from '../../components/Modal';
+import { SelectCurrencyModalComponent } from '../../components/SelectCurrencyModal';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { RootTabsParamList } from '../../routes/routes';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { BalanceAndProfitContent } from '../../contexts/BalanceAndProfitContent';
 
 type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'AddCash'>
@@ -36,6 +36,7 @@ interface BalanceProps {
     },
     value: number;
     date: Date;
+    id: string;
 }
 
 export const AddCash = ({ navigation, route }: ScreenProps) => {
@@ -77,6 +78,7 @@ export const AddCash = ({ navigation, route }: ScreenProps) => {
                 },
                 date,
                 value: Number(value),
+                id: uuidV4(),
             }
 
             addNewBalanceDate(data)
@@ -136,7 +138,7 @@ export const AddCash = ({ navigation, route }: ScreenProps) => {
                 <AddCashButton onPress={handleCreateNewDataBalance} />
             </ContentAddButton>
 
-            <ModalComponent
+            <SelectCurrencyModalComponent
                 visible={modalVisible}
                 assets={assets}
                 setModalVisible={handleSetVisibleModal}

@@ -1,7 +1,7 @@
 import { FlashList } from "@shopify/flash-list";
 import { useEffect, useState } from "react";
 import { assetsProps } from "../../hooks/useCoinAPI";
-import { SelectCoinModal } from "../SelectCoinModal";
+import { SelectCoin } from "../SelectCoin";
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 
 
@@ -20,7 +20,7 @@ interface ModalComponentProps {
     setModalVisible: () => void;
 }
 
-export const ModalComponent = ({ visible, assets, setModalVisible }: ModalComponentProps) => {
+export const SelectCurrencyModalComponent = ({ visible, assets, setModalVisible }: ModalComponentProps) => {
 
     const [assetActive, setAssetActive] = useState({ name: 'Bitcoin', id: 'BTC' })
 
@@ -61,7 +61,7 @@ export const ModalComponent = ({ visible, assets, setModalVisible }: ModalCompon
                         showsVerticalScrollIndicator={false}
                         renderItem={({ item }) => {
                             return (
-                                <SelectCoinModal
+                                <SelectCoin
                                     name={item.name}
                                     Id={item.assetId}
                                     onPress={() => handleSelectAssetActive(item)}

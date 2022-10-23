@@ -16,7 +16,7 @@ interface CoinModalProps extends TouchableOpacityProps {
 }
 
 
-export const SelectCoinModal = ({ Id, name, ...rest }: CoinModalProps) => {
+export const SelectCoin = ({ Id, name, ...rest }: CoinModalProps) => {
 
     const uri = icons.find((asset) => asset.asset_id === Id)!.url
 

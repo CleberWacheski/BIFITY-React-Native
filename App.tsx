@@ -5,6 +5,7 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 
+import 'react-native-get-random-values'
 import { NavigationContainer } from '@react-navigation/native';
 import { Pages } from './src/routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

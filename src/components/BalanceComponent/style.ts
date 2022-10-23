@@ -1,8 +1,9 @@
 import { RFValue } from "react-native-responsive-fontsize"
 import styled from "styled-components/native"
+import {TouchableOpacity} from 'react-native'
 
 
-export const Container = styled.View`
+export const Container = styled(TouchableOpacity)`
 `
 
 export const Balance = styled.View`

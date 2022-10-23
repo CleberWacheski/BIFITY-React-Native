@@ -13,6 +13,9 @@ import {
 } from './style'
 
 import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { BalanceDetailsModal } from '../BalanceDetailsModal';
+import { useTheme } from 'styled-components';
 
 interface BalanceComponentProps {
     balanceValue: number;
@@ -22,8 +25,24 @@ interface BalanceComponentProps {
 
 export const BalanceComponent = ({ balanceValue, profitValue, balancePercentege }: BalanceComponentProps) => {
 
+    const theme = useTheme()
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const closeModal = () => { setModalVisible(false) }
+
+    function OpenModal() {
+
+        if (balanceValue != 0) {
+            setModalVisible(true)
+        }
+    }
+
     return (
-        <Container>
+        <Container
+            activeOpacity={0.8}
+            onPress={OpenModal}
+        >
             <Balance>
                 <TotalBalance>
                     <Description>
@@ -33,12 +52,12 @@ export const BalanceComponent = ({ balanceValue, profitValue, balancePercentege 
                         $ {balanceValue}
                     </Value>
                 </TotalBalance>
-                <PercentegeCard> 
+                <PercentegeCard>
                     <Percentege>
                         <Ionicons
-                            name="caret-up-sharp"
+                            name={(balancePercentege >= 0) ? 'caret-up' : 'caret-down'}
                             size={12}
-                            color="#9BFFF2"
+                            color={(balancePercentege >= 0) ? '#50C878' : theme.colors.secondary}
                         />
                         {balancePercentege}%
                     </Percentege>
@@ -55,6 +74,13 @@ export const BalanceComponent = ({ balanceValue, profitValue, balancePercentege 
                     </ProfitValue>
                 </ProfitContent>
             </ProfitCard>
+
+            <BalanceDetailsModal
+                closeModal={closeModal}
+                visible={modalVisible}
+
+
+            />
 
         </Container>
     )

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import {
     Container,
@@ -19,7 +19,7 @@ import { RootTabsParamList } from '../../routes/routes';
 import { FlashList } from '@shopify/flash-list';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { UserContext } from '../../contexts/userContext';
-import { BalanceComponent } from '../../components/BalanceComponet';
+import { BalanceComponent } from '../../components/BalanceComponent';
 import { AddCashButton } from '../../components/AddCashButton';
 import { BalanceAndProfitContent } from '../../contexts/BalanceAndProfitContent';
 
@@ -28,11 +28,16 @@ type ScreenProps = BottomTabScreenProps<RootTabsParamList, 'Home'>
 
 const Home = ({ navigation, route }: ScreenProps) => {
 
-    const assets = route.params?.assets
+    const assets = route.params!.assets
     const { user } = useContext(UserContext)
     const userImageUrl = user.picture.replace("s96-c", "s500-c");
-    
-    const { summary } = useContext(BalanceAndProfitContent)
+    const itemSize = assets.length
+
+    const { summary, getBalanceData,balance } = useContext(BalanceAndProfitContent)
+
+    useEffect(() => {
+        getBalanceData(assets)
+    }, [balance])
 
 
     return (
@@ -68,7 +73,7 @@ const Home = ({ navigation, route }: ScreenProps) => {
                     <FlashList
                         data={assets}
                         keyExtractor={coin => coin.assetId}
-                        estimatedItemSize={5}
+                        estimatedItemSize={itemSize}
                         showsHorizontalScrollIndicator={false}
                         renderItem={({ item }) => {
                             return (

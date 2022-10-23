@@ -18,7 +18,6 @@ export const Settings = () => {
     
     const userImageUrl = user.picture.replace("s96-c", "s500-c");
 
-    console.log(user.picture)
 
     return (
         <Container>

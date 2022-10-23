@@ -31,6 +31,7 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
     const [assetActive, setAssetActive] = useState(route.params!.assetActive)
     const assetSelected = assets!.find((asset) => asset.assetId === assetActive)
     const { data, isLoading, isFetching, refetch } = useStatus(assetActive)
+    const itemSize = assets.length
 
 
     useEffect(() => {
@@ -60,7 +61,7 @@ export const Currencies = ({ navigation, route }: ScreenProps) => {
             <FlashList
                 data={assets}
                 keyExtractor={coin => coin.assetId}
-                estimatedItemSize={5}
+                estimatedItemSize={itemSize}
                 showsHorizontalScrollIndicator={false}
                 extraData={assetActive}
                 renderItem={({ item }) => {

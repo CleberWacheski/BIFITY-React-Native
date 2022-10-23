@@ -51,7 +51,6 @@ export const Routes = ({ data }: RoutesParamsProps) => {
             <Tab.Screen name="AddCash" component={AddCash} initialParams={{ assets: data, assetActive: { name: 'Bitcoin', id: 'BTC' } }} />
             <Tab.Screen name="Currencies" component={Currencies} initialParams={{ assets: data, assetActive: 'ETH' }} />
             <Tab.Screen name="Settings" component={Settings} />
-            <Tab.Screen name="Notifications" component={Notifications} />
 
         </Tab.Navigator>
     )

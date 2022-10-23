@@ -12,6 +12,7 @@ interface BalanceProps {
     },
     value: number;
     date: Date;
+    id: string;
 }
 
 interface SummaryProps {
@@ -33,6 +34,8 @@ interface BalanceContextProps {
     balance: BalanceProps[]
     summary: SummaryProps;
     getBalanceData: (assets: assetsProps[]) => void;
+    removeItemInBalance: (id: string) => void;
+
 }
 
 interface BalaceAndProfitProviderProps {
@@ -51,7 +54,7 @@ export const BalaceAndProfitProvider = ({ children }: BalaceAndProfitProviderPro
     const { email } = user
 
     const KEY = `@${email}:BITIFY`
- 
+
     useEffect(() => {
         const getData = async () => {
 
@@ -87,6 +90,19 @@ export const BalaceAndProfitProvider = ({ children }: BalaceAndProfitProviderPro
         setBalance(state => [...state, data])
     }
 
+    function removeItemInBalance(id: string) {
+        const newBalance = balance.filter((balance) => balance.id != id)
+        setBalance(newBalance)
+
+        if (newBalance.length === 0) {
+            setSummary({
+                profit: 0,
+                balance: 0,
+                balancePercentege: 0,
+            })
+        }
+    }
+
     function getBalanceData(assets: assetsProps[]) {
 
         if (balance.length > 0) {
@@ -120,6 +136,8 @@ export const BalaceAndProfitProvider = ({ children }: BalaceAndProfitProviderPro
     }
 
 
+
+
     useEffect(() => {
 
         const storeData = async (data: any) => {
@@ -144,7 +162,7 @@ export const BalaceAndProfitProvider = ({ children }: BalaceAndProfitProviderPro
 
 
     return (
-        <BalanceAndProfitContent.Provider value={{ addNewBalanceDate, balance, summary, getBalanceData }}>
+        <BalanceAndProfitContent.Provider value={{ addNewBalanceDate, balance, summary, getBalanceData, removeItemInBalance }}>
             {children}
         </BalanceAndProfitContent.Provider>
     )
